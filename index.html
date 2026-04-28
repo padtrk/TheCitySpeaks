@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The City Speaks — A Chronicle of London Through Its Own Instruments</title>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=IM+Fell+English:ital,wght@0,400;1,400&family=IM+Fell+DW+Pica+SC&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #ede4cf;
+    --paper-2: #e3d8bd;
+    --ink: #1a140c;
+    --ink-soft: #2c2418;
+    --ochre: #8a4818;
+    --crimson: #5a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #1a140c; }
+  body {
+    font-family: 'IM Fell English', Georgia, serif;
+    color: var(--ink);
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 12% 8%, rgba(120,80,30,0.10), transparent 35%),
+      radial-gradient(ellipse at 88% 14%, rgba(90,60,20,0.08), transparent 40%),
+      radial-gradient(ellipse at 30% 92%, rgba(110,70,25,0.10), transparent 38%),
+      radial-gradient(ellipse at 78% 78%, rgba(80,50,15,0.07), transparent 42%),
+      var(--paper);
+    background-attachment: fixed;
+  }
+  #sheet { max-width: 560px; margin: 0 auto; padding: 0 14px 100px; }
+  #masthead { padding: 18px 4px 8px; border-bottom: 3px double var(--ink); text-align: center; }
+  #masthead h1 {
+    font-family: 'UnifrakturCook', serif;
+    font-size: 2.4rem;
+    line-height: 1;
+    margin: 4px 0 6px;
+  }
+  #masthead .sub {
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  #masthead .route {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  /* The opening utterance — the city's voices speaking each in turn.
+     Four lines of prose, each from a different instrument, refreshed every
+     minute alongside the live data. Sober and laconic, the way working
+     things speak. */
+  #opening {
+    border-bottom: 3px double var(--ink);
+    border-top: 1px solid var(--ink);
+    padding: 14px 12px 16px;
+    font-family: 'IM Fell English', Georgia, serif;
+  }
+  .opening-line {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin-bottom: 4px;
+    font-style: italic;
+    color: var(--ink);
+    opacity: 0;
+    animation: speak 0.9s ease-out forwards;
+  }
+  .opening-line:nth-child(1) { animation-delay: 0.1s; }
+  .opening-line:nth-child(2) { animation-delay: 0.5s; }
+  .opening-line:nth-child(3) { animation-delay: 0.9s; }
+  .opening-line:nth-child(4) { animation-delay: 1.3s; }
+  @keyframes speak {
+    from { opacity: 0; transform: translateX(-4px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .opening-line .src {
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-style: normal;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-right: 8px;
+  }
+  .case-header {
+    text-align: center;
+    margin: 28px 0 14px;
+    padding: 16px 8px;
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    animation: ink 1.2s ease-out both;
+  }
+  .case-header .case-no {
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .case-header .case-summon {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 10px;
+    padding: 0 4px;
+  }
+  .case-header .case-title {
+    font-family: 'UnifrakturCook', serif;
+    font-size: 1.55rem;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .case-header.closed .case-title {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--crimson);
+  }
+  #strip { display: flex; flex-direction: column; padding-top: 14px; }
+  .panel {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(26,20,12,0.3);
+    animation: ink 1.0s cubic-bezier(.22,.68,0,1.15) both;
+  }
+  @keyframes ink {
+    from { opacity: 0; filter: blur(2px); transform: translateY(8px); }
+    to { opacity: 1; filter: blur(0); transform: translateY(0); }
+  }
+  .panel-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+    padding: 0 4px;
+  }
+  .panel-meta .phase {
+    color: var(--ochre);
+    font-style: italic;
+    font-family: 'IM Fell English', serif;
+    letter-spacing: 0.04em;
+  }
+  .panel-frame {
+    border: 1px solid var(--ink);
+    padding: 4px;
+    background: var(--paper-2);
+  }
+  .panel-frame svg { display: block; width: 100%; height: auto; background: var(--paper-2); }
+  .panel-prose {
+    font-size: 1rem;
+    line-height: 1.55;
+    margin: 12px 8px 0;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+  .panel-prose .dialogue {
+    display: block;
+    font-style: italic;
+    margin: 6px 14px;
+    color: var(--ink-soft);
+  }
+  .panel-prose .dialogue::before { content: '“'; }
+  .panel-prose .dialogue::after { content: '”'; }
+  .panel.first .panel-prose::first-letter {
+    font-family: 'UnifrakturCook', serif;
+    font-size: 2.6rem;
+    float: left;
+    line-height: 0.86;
+    padding: 4px 6px 0 0;
+    color: var(--ochre);
+  }
+  #footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--paper);
+    border-top: 3px double var(--ink);
+    padding: 6px 14px 8px;
+    text-align: center;
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    z-index: 100;
+  }
+  #footer .next {
+    color: var(--ochre);
+    font-style: italic;
+    font-family: 'IM Fell English', serif;
+    letter-spacing: 0.04em;
+  }
+  #footer .live {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--crimson);
+    margin-right: 6px;
+    vertical-align: middle;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 0.3 } 50% { opacity: 1 } }
+  #loading {
+    text-align: center;
+    margin: 30px 0;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  #loading .dot { display: inline-block; animation: blink 1.4s infinite; }
+  #loading .dot:nth-child(2) { animation-delay: 0.2s; }
+  #loading .dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%,80%,100% { opacity: 0.2 } 40% { opacity: 1 } }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(60,40,15,0.025) 0px, rgba(60,40,15,0.025) 1px, transparent 1px, transparent 3px),
+      repeating-linear-gradient(90deg, rgba(60,40,15,0.018) 0px, rgba(60,40,15,0.018) 1px, transparent 1px, transparent 4px);
+    z-index: 200;
+    mix-blend-mode: multiply;
+  }
+</style>
+</head>
+<body>
+
+<div id="sheet">
+  <header id="masthead">
+    <div class="sub">A Daily Chronicle &middot; Of London Through Its Own Instruments</div>
+    <h1>The City Speaks</h1>
+    <div class="route"><em>by way of the 343, from New Cross Gate unto Aldgate</em></div>
+  </header>
+
+  <div id="opening">
+    <div class="opening-line" id="ol-river">&mdash;</div>
+    <div class="opening-line" id="ol-air">&mdash;</div>
+    <div class="opening-line" id="ol-wind">&mdash;</div>
+    <div class="opening-line" id="ol-bus">&mdash;</div>
+  </div>
+
+  <div id="strip">
+    <div id="loading">&mdash; the case file is being opened<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span> &mdash;</div>
+  </div>
+</div>
+
+<div id="footer">
+  <span class="live"></span>THE CITY IS SPEAKING &middot; NEXT IN <span class="next" id="countdown">&mdash;</span>
+</div>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE 343 — slot-and-bank engine, no LLM at runtime
+   Cases pre-written. Live data slots into the prose at render time.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const PANEL_INTERVAL_MS = 90 * 1000;
+const RLAT = 51.4997, RLON = -0.0985;
+
+/* ───── live world state ───── */
+const W = {
+  weather: null, air: null, tide: null, bus: null,
+  sun: null /* {sunrise, sunset} */
+};
+
+/* ───── story state ───── */
+const STORY = {
+  caseNum: 0,
+  currentCase: null,
+  panelInCase: 0,
+  recentlyShown: [], /* case ids, used to avoid repeats */
+  generating: false
+};
+
+/* Pull recently-shown from localStorage if available */
+try {
+  const stored = localStorage.getItem('h343_recent');
+  if (stored) STORY.recentlyShown = JSON.parse(stored);
+} catch(e) {}
+
+function rememberCase(id) {
+  STORY.recentlyShown.unshift(id);
+  STORY.recentlyShown = STORY.recentlyShown.slice(0, 8);
+  try { localStorage.setItem('h343_recent', JSON.stringify(STORY.recentlyShown)); } catch(e) {}
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   DATA FETCHERS
+   ───────────────────────────────────────────────────────────────────── */
+async function fetchWeather() {
+  try {
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${RLAT}&longitude=${RLON}&current=temperature_2m,rain,weather_code,wind_speed_10m,cloud_cover&daily=sunrise,sunset&timezone=Europe/London`);
+    const j = await r.json();
+    W.weather = j.current;
+    if (j.daily?.sunrise?.[0]) W.sun = { sunrise: j.daily.sunrise[0], sunset: j.daily.sunset[0] };
+  } catch(e) {}
+}
+async function fetchAir() {
+  try {
+    const r = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${RLAT}&longitude=${RLON}&current=pm10,nitrogen_dioxide,birch_pollen,grass_pollen,alder_pollen,mugwort_pollen,ragweed_pollen,olive_pollen&timezone=Europe/London`);
+    W.air = (await r.json()).current;
+  } catch(e) {}
+}
+async function fetchTide() {
+  try {
+    const r = await fetch('https://environment.data.gov.uk/flood-monitoring/id/stations/E70839/readings?latest');
+    W.tide = (await r.json()).items?.[0];
+  } catch(e) {}
+}
+async function fetchBus() {
+  /* Pick a stop at random from the route, get next 343. */
+  const STOPS = [
+    { name: 'New Cross Gate',     id: '490011517S' },
+    { name: 'Peckham Rye',        id: '490004733S' },
+    { name: 'Elephant & Castle',  id: '490000078N' },
+    { name: 'London Bridge',      id: '490000130E' },
+    { name: 'Tower Bridge Road',  id: '490011255S' }
+  ];
+  try {
+    const stop = STOPS[Math.floor(Math.random() * STOPS.length)];
+    const r = await fetch(`https://api.tfl.gov.uk/StopPoint/${stop.id}/Arrivals`);
+    const arr = (await r.json()).filter(a => a.lineName === '343').sort((a,b) => a.timeToStation - b.timeToStation);
+    if (arr.length) W.bus = { stop: stop.name, arrivals: arr.slice(0,3) };
+  } catch(e) {}
+}
+async function refreshAll() {
+  await Promise.allSettled([fetchWeather(), fetchAir(), fetchTide(), fetchBus()]);
+  updateDateline();
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONDITION READING — derive booleans from raw data
+   ═══════════════════════════════════════════════════════════════════════════ */
+function nowConditions() {
+  const now = new Date();
+  const h = now.getHours();
+  const day = now.getDay(); /* 0 Sun .. 6 Sat */
+  const month = now.getMonth(); /* 0 Jan .. 11 Dec */
+
+  /* darkness: prefer the live sunset/sunrise from open-meteo, fall back to month heuristic */
+  let isDark = h < 6 || h >= 20;
+  if (W.sun) {
+    const t = now.getTime();
+    const sr = new Date(W.sun.sunrise).getTime();
+    const ss = new Date(W.sun.sunset).getTime();
+    isDark = t < sr || t > ss;
+  }
+
+  const temp = W.weather ? W.weather.temperature_2m : 12;
+  const rain = W.weather ? W.weather.rain : 0;
+  const cloud = W.weather ? W.weather.cloud_cover : 50;
+  const wind = W.weather ? W.weather.wind_speed_10m : 10;
+  const tide = W.tide ? parseFloat(W.tide.value) : 2.5;
+  const tideValid = !isNaN(tide);
+
+  /* pollen presence — true if any species is meaningfully active.
+     Used by case requirements so pollen-narrated stories only fire
+     when there is actually pollen in the air. */
+  const pollenSum = W.air ? (
+    (W.air.birch_pollen || 0) +
+    (W.air.alder_pollen || 0) +
+    (W.air.grass_pollen || 0) +
+    (W.air.mugwort_pollen || 0) +
+    (W.air.ragweed_pollen || 0) +
+    (W.air.olive_pollen || 0)
+  ) : 0;
+
+  return {
+    hour: h,
+    day_of_week: day,
+    month: month,
+    is_weekend: day === 0 || day === 6,
+    is_dark: isDark,
+    is_dawn: !isDark && h < 9,
+    is_morning: h >= 6 && h < 12,
+    is_afternoon: h >= 12 && h < 17,
+    is_evening: h >= 17 && h < 20,
+    is_night: h >= 20 || h < 6,
+    is_late_night: h >= 23 || h < 4,
+    temp_c: temp,
+    is_cold: temp < 8,
+    is_cool: temp >= 8 && temp < 14,
+    is_mild: temp >= 14 && temp < 20,
+    is_warm: temp >= 20,
+    is_raining: rain > 0.2,
+    is_heavy_rain: rain > 1.5,
+    is_overcast: cloud > 70,
+    is_clear: cloud < 30,
+    is_windy: wind > 20,
+    tide_m: tideValid ? tide : null,
+    is_high_tide: tideValid && tide > 4.0,
+    is_low_tide: tideValid && tide < 1.5,
+    is_tide_rising: tideValid && tide > 2.5 && tide < 4.5,
+    is_tide_falling: tideValid && tide < 2.5,
+    pollen_active: pollenSum > 5,
+    pollen_heavy: pollenSum > 50
+  };
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SLOT RESOLVER
+   Each slot is a small function that returns idiomatic English.
+   Slots are referenced in case prose as {{slot_name}}.
+   ═══════════════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE VOICES
+   Each instrument has a register. The Thames is slow and tidal, with a long
+   memory. The wind is brief and opportunistic. The 343 is fragmentary. The
+   grid is anxious about its own intensity. The air is sour about traffic.
+   The bridge is bored unless lifting. The lamps speak only after dark.
+   Pollen speaks in season and is mute in winter.
+
+   Each voice function returns either:
+     - a short utterance string (1-2 sentences, sober, factual), or
+     - null, meaning the instrument has nothing to say tonight.
+
+   The sober register is the point. These are working things speaking.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const VOICES = {
+  /* ───── THE THAMES ─────
+     Slow voice. Speaks of itself as a present-tense fact, not metaphor.
+     Memory is allowed only when conditions match a former case. */
+  thames: () => {
+    if (!W.tide || isNaN(parseFloat(W.tide.value))) return null;
+    const t = parseFloat(W.tide.value);
+    const lines = [];
+    if (t > 5.0) lines.push('I am running hard tonight, the foreshore long under.');
+    else if (t > 4.0) lines.push('I am high. The wall is awash at its base.');
+    else if (t > 3.5) lines.push('I am still rising, two feet short of my mark.');
+    else if (t > 2.5) lines.push('I am midway, neither out nor in.');
+    else if (t > 1.5) lines.push('I am pulling out, a brown skin of mud beginning to show.');
+    else if (t > 0.8) lines.push('I am low. The gravel and the rope and the stone are showing.');
+    else lines.push('I am all but out. The foreshore is mine to walk on.');
+    /* occasional second sentence — memory or weather */
+    const c = nowConditions();
+    if (Math.random() < 0.25) {
+      if (c.is_high_tide && c.is_dark && c.is_raining) lines.push('I have been here before, on a night like this.');
+      else if (c.is_low_tide && c.is_clear) lines.push('Mudlarks will be down with their torches.');
+      else if (c.is_windy) lines.push('The wind is making me restless.');
+    }
+    return lines.join(' ');
+  },
+
+  /* ───── THE WIND ─────
+     Brief voice. Says one thing, moves on. */
+  wind: () => {
+    if (!W.weather) return null;
+    const w = W.weather.wind_speed_10m || 0;
+    if (w > 35) return 'I am up tonight, hard from the south-east.';
+    if (w > 22) return 'I am steady off the river.';
+    if (w > 12) return 'I am light from the south-east.';
+    if (w > 5)  return 'I am a breath, no more.';
+    return null; /* dead calm — the wind has nothing to say */
+  },
+
+  /* ───── THE 343 ─────
+     Fragmentary voice. Arrival times, stops. */
+  bus: () => {
+    if (!W.bus?.arrivals?.length) return null;
+    const m = Math.round(W.bus.arrivals[0].timeToStation / 60);
+    const stop = W.bus.stop;
+    if (m === 0) return `One of me is at ${stop} now.`;
+    if (m === 1) return `One of me is a minute off ${stop}.`;
+    if (m < 8)  return `One of me is ${m} minutes off ${stop}.`;
+    if (m < 15) return `One of me is a quarter-hour off ${stop}.`;
+    return `Nothing of mine for some minutes yet, at ${stop}.`;
+  },
+
+  /* ───── THE GRID ─────
+     Anxious voice. Knows when it's running dirty. */
+  grid: () => {
+    if (!W.grid?.index) return null;
+    const idx = W.grid.index;
+    if (idx === 'very low') return 'I am clean tonight. The wind is doing the work.';
+    if (idx === 'low')      return 'I am running clean.';
+    if (idx === 'moderate') return 'I am ordinary.';
+    if (idx === 'high')     return 'I am running on gas. The turbines are spinning hard somewhere northward.';
+    if (idx === 'very high') return 'I am dirty tonight. I am sorry for it.';
+    return null;
+  },
+
+  /* ───── THE AIR ─────
+     Sour voice. Knows what the lorries do to it. */
+  air: () => {
+    if (!W.air) return null;
+    const n = W.air.nitrogen_dioxide;
+    if (n == null) return null;
+    if (n > 80) return 'I am foul tonight. The Old Kent Road is at me.';
+    if (n > 50) return 'I am carrying the lorries\' breath.';
+    if (n > 25) return 'I am ordinary London air, neither clean nor noticeably foul.';
+    if (n > 10) return 'I am cleaner than usual. Take it as a small gift.';
+    return 'I am unusually clean. A wind has been through me.';
+  },
+
+  /* ───── THE BRIDGE ─────
+     Bored voice. Mostly nothing. Occasionally lifts.
+     Without a real-time bridge-lift feed we infer: bored unless something
+     specific is happening. */
+  bridge: () => {
+    /* The Tower Bridge lift schedule is published as static data, not live.
+       Without a live feed, the bridge is mostly silent. We let it speak
+       only on rare moods — a high tide, a windy night. */
+    const c = nowConditions();
+    if (c.is_high_tide && c.is_windy) return 'I am holding against the wind tonight.';
+    if (c.is_high_tide && c.is_dark) return 'The river is at my piers. I have nothing to do but stand.';
+    if (Math.random() < 0.15 && c.is_dark) return 'I am lit. There is no traffic on me.';
+    return null; /* bridge is bored. Says nothing. */
+  },
+
+  /* ───── THE LAMPS ─────
+     Speak only when lit. */
+  lamps: () => {
+    const c = nowConditions();
+    if (!c.is_dark && !c.is_dawn) return null;
+    if (c.is_dawn) return 'We are still on, but the morning is arguing with us.';
+    if (c.is_raining) return 'We are making haloes in the wet.';
+    if (c.is_late_night) return 'We are lit, though there is no one for us to light.';
+    return 'We are lit along the line.';
+  },
+
+  /* ───── POLLEN ─────
+     Speaks in season, is mute in winter.
+     Open-meteo air-quality endpoint provides birch, grass, alder, ragweed,
+     and mugwort counts. We use whichever is currently highest. */
+  pollen: () => {
+    if (!W.air) return null;
+    const month = new Date().getMonth(); /* 0 = Jan */
+    const counts = {
+      birch:   W.air.birch_pollen   || 0,
+      alder:   W.air.alder_pollen   || 0,
+      grass:   W.air.grass_pollen   || 0,
+      mugwort: W.air.mugwort_pollen || 0,
+      ragweed: W.air.ragweed_pollen || 0,
+      olive:   W.air.olive_pollen   || 0
+    };
+    const total = Object.values(counts).reduce((a,b) => a+b, 0);
+    if (total < 1) return null; /* nothing to say in winter */
+    /* find the dominant pollen */
+    let dom = null, domVal = 0;
+    for (const [k, v] of Object.entries(counts)) {
+      if (v > domVal) { dom = k; domVal = v; }
+    }
+    const phrases = {
+      birch:   ['The birches are at it again.', 'The birches are heavy.'],
+      alder:   ['The alders are out.', 'The alders are thick on the air.'],
+      grass:   ['The grass is heavy across the south of the river tonight.', 'The grass is at me.'],
+      mugwort: ['The mugwort is up along the verges.', 'The mugwort is in.'],
+      ragweed: ['The ragweed is out late this year.', 'The ragweed is on the wind.'],
+      olive:   ['The olives are out, late and unusual.', 'The olives are on me.']
+    };
+    if (domVal < 5) return null; /* trace amounts — the air keeps quiet */
+    return phrases[dom][Math.floor(Math.random() * phrases[dom].length)];
+  },
+
+  /* ───── THE NIGHT ITSELF ─────
+     A general atmosphere voice for when other voices are quiet. */
+  night: () => {
+    const c = nowConditions();
+    if (c.is_late_night) return 'It is late. The streets have thinned.';
+    if (c.is_dawn) return 'The sky is beginning to lift.';
+    if (c.is_evening && c.is_dark) return 'The dark has come down already.';
+    if (c.is_morning) return 'The morning is up.';
+    return null;
+  }
+};
+
+/* Build the opening utterance — pick four voices that have something to say. */
+function composeOpening() {
+  /* Order of speakers: the Thames first if it has something to say,
+     then a weather voice (wind, lamps, or air), then bus, then grid or pollen.
+     This gives a consistent opening rhythm without rigid assignment. */
+  const speakers = [];
+  const try_ = (id, label) => {
+    const text = VOICES[id]?.();
+    if (text) speakers.push({ id, label, text });
+  };
+
+  try_('thames', 'The river');
+  /* second slot: pick whichever weather voice has something to say */
+  for (const id of ['wind', 'lamps', 'air']) {
+    if (speakers.length >= 2) break;
+    try_(id, { wind: 'The wind', lamps: 'The lamps', air: 'The air' }[id]);
+  }
+  /* third slot: bus */
+  try_('bus', 'The 343');
+  /* fourth slot: grid or pollen, prefer pollen in season */
+  if (speakers.length < 4) {
+    const polText = VOICES.pollen?.();
+    if (polText) speakers.push({ id: 'pollen', label: 'The pollen', text: polText });
+    else try_('grid', 'The grid');
+  }
+  /* if we still don't have four, fall back on remaining voices */
+  if (speakers.length < 4) {
+    for (const id of ['bridge', 'air', 'grid', 'night']) {
+      if (speakers.length >= 4) break;
+      if (speakers.find(s => s.id === id)) continue;
+      const lbl = { bridge: 'The bridge', air: 'The air', grid: 'The grid', night: 'The night' }[id];
+      try_(id, lbl);
+    }
+  }
+  return speakers.slice(0, 4);
+}
+
+
+const SLOTS = {
+  /* ───── time ───── */
+  time_phrase: () => {
+    const d = new Date();
+    const h = d.getHours();
+    const wd = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.getDay()];
+    if (h === 0) return 'It was just past midnight on a ' + wd;
+    if (h < 4) return `It was something past ${pad(h)} on a ${wd} morning`;
+    if (h < 6) return `It was before the first light, on a ${wd}`;
+    if (h < 9) return `It was a little after ${spellHour(h)} on a ${wd} morning`;
+    if (h < 12) return `It was a ${wd} mid-morning`;
+    if (h === 12) return `It was a little before one on ${wd}`;
+    if (h < 14) return `It was ${spellHour(h)}, ${wd} afternoon`;
+    if (h < 17) return `It was ${spellHour(h)} on a ${wd} afternoon`;
+    if (h < 19) return `It was ${spellHour(h)} on a ${wd} evening`;
+    if (h < 22) return `It was going on ${spellHour(h+1)} on a ${wd} night`;
+    return `It was late on a ${wd} night`;
+  },
+  hour_short: () => {
+    const d = new Date();
+    return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  },
+  weekday: () => {
+    return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()];
+  },
+  weekday_lower: () => {
+    return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()].toLowerCase();
+  },
+
+  /* ───── weather ───── */
+  rain_phrase_lead: () => {
+    const r = W.weather?.rain || 0;
+    if (r > 2.5) return 'It had been raining for hours; the gutters were full and the air smelled of wet brick.';
+    if (r > 0.6) return 'Rain was falling steadily, the sort London gets used to without comment.';
+    if (r > 0.1) return 'A thin rain was coming down, more idea than weather.';
+    if ((W.weather?.cloud_cover || 0) > 80) return 'The sky was a low grey lid; rain seemed inevitable but had not yet committed to anything.';
+    if ((W.weather?.cloud_cover || 0) > 40) return 'The sky was high cloud, neither one thing nor the other.';
+    return 'The sky was clear, the air still.';
+  },
+  rain_phrase_short: () => {
+    const r = W.weather?.rain || 0;
+    if (r > 1.5) return 'in heavy rain';
+    if (r > 0.2) return 'in the rain';
+    if ((W.weather?.cloud_cover || 0) > 70) return 'under a flat grey sky';
+    return 'in dry weather';
+  },
+  rain_phrase_short_capitalised: () => {
+    const r = W.weather?.rain || 0;
+    if (r > 1.5) return 'In heavy rain';
+    if (r > 0.2) return 'In the rain';
+    if ((W.weather?.cloud_cover || 0) > 70) return 'Under a flat grey sky';
+    return 'In dry weather';
+  },
+  wet_phrase: () => {
+    const r = W.weather?.rain || 0;
+    if (r > 1.0) return 'running with water';
+    if (r > 0.2) return 'wet through';
+    if ((W.weather?.cloud_cover || 0) > 70) return 'damp from the night';
+    return 'dry, for once';
+  },
+  wind_phrase: () => {
+    const w = W.weather?.wind_speed_10m || 0;
+    if (w > 35) return 'A strong wind was coming up off the river, snatching at his coat.';
+    if (w > 22) return 'There was a steady wind off the river, enough to lift papers if any had been about.';
+    if (w > 12) return 'A breeze was coming up from the south-east.';
+    return 'The air was still.';
+  },
+  wind_short: () => {
+    const w = W.weather?.wind_speed_10m || 0;
+    if (w > 35) return 'gusting hard from the SE';
+    if (w > 20) return 'fresh from the SE';
+    if (w > 10) return 'light SE breeze';
+    return 'still';
+  },
+  cold_phrase: () => {
+    const t = W.weather?.temperature_2m || 12;
+    if (t < 2) return 'It was cold enough to take notice of, the kind of cold that goes through three layers of wool.';
+    if (t < 7) return `It was ${Math.round(t)} degrees and Hart was glad of his coat.`;
+    if (t < 12) return `${Math.round(t)} degrees, and the air felt closer to winter than to anything else.`;
+    if (t < 18) return `It was ${Math.round(t)} degrees, mild enough.`;
+    return `It was ${Math.round(t)} degrees, warm for the season.`;
+  },
+  temp_short: () => `${Math.round(W.weather?.temperature_2m || 12)}°`,
+
+  /* ───── tide ───── */
+  tide_phrase: () => {
+    const t = W.tide ? parseFloat(W.tide.value) : null;
+    if (t == null || isNaN(t)) return 'somewhere in its cycle';
+    if (t > 5.0) return 'running hard on the flood, the foreshore long covered';
+    if (t > 4.0) return 'high, the wall awash at its base';
+    if (t > 3.0) return 'still rising, a foot or two short of the mark';
+    if (t > 2.0) return 'midway, neither one thing nor the other';
+    if (t > 1.2) return 'pulling out, a brown skin of mud beginning to show';
+    return 'all but out, the gravel and rope and stone of the foreshore exposed';
+  },
+  tide_height_m: () => {
+    const t = W.tide ? parseFloat(W.tide.value) : null;
+    return t == null || isNaN(t) ? '—' : t.toFixed(1);
+  },
+  tide_state_short: () => {
+    const t = W.tide ? parseFloat(W.tide.value) : null;
+    if (t == null || isNaN(t)) return 'unknown';
+    if (t > 4.0) return 'high';
+    if (t > 2.5) return 'rising';
+    if (t > 1.5) return 'falling';
+    return 'low';
+  },
+
+  /* ───── bus ───── */
+  next_bus_stop: () => W.bus?.stop || 'somewhere along the line',
+  next_bus_minutes: () => {
+    const m = W.bus?.arrivals?.[0]?.timeToStation;
+    if (m == null) return 'shortly';
+    const min = Math.round(m / 60);
+    if (min === 0) return 'in the next minute';
+    if (min === 1) return 'in a minute';
+    if (min < 8) return `in ${min} minutes`;
+    return `in something under a quarter of an hour`;
+  },
+  bus_time_phrase: () => {
+    const m = W.bus?.arrivals?.[0]?.timeToStation;
+    const stop = W.bus?.stop;
+    if (m == null || !stop) return 'A 343 was due before long';
+    const min = Math.round(m / 60);
+    if (min < 3) return `A 343 was almost at ${stop}`;
+    if (min < 10) return `A 343 was ${min} minutes from ${stop}`;
+    return `The next 343 was a quarter of an hour off, at ${stop}`;
+  },
+
+  /* ───── light ───── */
+  light_phrase: () => {
+    const c = nowConditions();
+    if (c.is_late_night) return 'The streets were near empty.';
+    if (c.is_night) return 'The lamps were lit and the city had thinned to its evening rhythm.';
+    if (c.is_evening && c.is_dark) return 'It was dark already.';
+    if (c.is_dawn) return 'It was that grey hour when the lamps are still on but the sky is beginning to argue with them.';
+    if (c.is_morning) return 'The morning was up.';
+    return 'It was light.';
+  },
+  lamp_phrase: () => {
+    const c = nowConditions();
+    if (c.is_dark && c.is_raining) return 'the lamps in their iron brackets making haloes in the wet';
+    if (c.is_dark) return 'the lamps in their iron brackets cold and steady';
+    if (c.is_dawn) return 'the lamps still on, weak against the morning';
+    if (c.is_raining) return 'the lamp posts beaded with rain along their iron lengths';
+    return 'the lamp posts unlit and ordinary';
+  },
+
+  /* ───── derived: incident-time helpers ───── */
+  incident_time_phrase: () => {
+    /* the case "incident" was 20-30 minutes before now */
+    const d = new Date(Date.now() - (20 + Math.floor(Math.random()*10)) * 60000);
+    return clockToWords(d);
+  },
+  incident_time_short: () => {
+    const d = new Date(Date.now() - 25 * 60000);
+    return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  },
+  incident_plus_ten_short: () => {
+    const d = new Date(Date.now() - 15 * 60000);
+    return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  },
+
+  /* ───── tide turn helpers ───── */
+  turn_time_phrase: () => {
+    /* approximate: tide turns roughly every 6h12m. We don't know the next exact turn,
+       so guess from current state. Acceptable approximation for fiction. */
+    const c = nowConditions();
+    const offsetH = c.is_high_tide ? 1 : c.is_tide_rising ? 2 : c.is_low_tide ? 1 : 3;
+    const d = new Date(Date.now() + offsetH * 3600000);
+    return clockToWords(d);
+  },
+  post_turn_direction: () => {
+    const c = nowConditions();
+    return (c.is_high_tide || c.is_tide_rising) ? 'downstream, towards the sea' : 'upstream, on the new flood';
+  },
+
+  /* ───── air ───── */
+  air_phrase: () => {
+    const n = W.air?.nitrogen_dioxide;
+    if (n == null) return 'the air was as it was';
+    if (n > 80) return 'the air was foul, the kind of inner-London afternoon when the buildings hold their own breath';
+    if (n > 50) return 'the air carried that flat metallic tang the south-east arterials always have';
+    if (n > 25) return 'the air was ordinary London air, neither clean nor noticeably foul';
+    return 'the air was unusually clean for this stretch of the line';
+  }
+};
+
+/* helpers used by slots */
+function pad(n) { return String(n).padStart(2,'0'); }
+function spellHour(h) {
+  const names = ['midnight','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','one','two','three','four','five','six','seven','eight','nine','ten','eleven'];
+  return names[h] || String(h);
+}
+function clockToWords(d) {
+  const h = d.getHours(), m = d.getMinutes();
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  if (m < 7) return `just after ${spellHour(h)}`;
+  if (m < 22) return `a quarter past ${spellHour(h)}`;
+  if (m < 38) return `half past ${spellHour(h)}`;
+  if (m < 53) return `quarter to ${spellHour((h+1)%24)}`;
+  return `just before ${spellHour((h+1)%24)}`;
+}
+
+/* ───── render a string with {{slots}} ───── */
+function fillSlots(text) {
+  return text.replace(/\{\{(\w+)\}\}/g, (m, name) => {
+    const fn = SLOTS[name];
+    if (!fn) return `[?${name}]`;
+    try {
+      return fn();
+    } catch (e) {
+      console.warn('Slot', name, 'failed:', e.message);
+      return `[!${name}]`;
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CASE SELECTOR — pick a case fitting current conditions
+   ═══════════════════════════════════════════════════════════════════════════ */
+function scoreCase(caseObj, cond) {
+  /* `requires`: hard preferences. Each missed requirement is a -10 penalty
+     (rather than instant disqualification) so the selector can fall back gracefully.
+     `prefers`: each match adds +1. */
+  let score = 0;
+  if (caseObj.requires) {
+    for (const k of Object.keys(caseObj.requires)) {
+      if (cond[k] !== caseObj.requires[k]) score -= 10;
+      else score += 2;
+    }
+  }
+  if (caseObj.prefers) {
+    for (const k of Object.keys(caseObj.prefers)) {
+      if (cond[k] === caseObj.prefers[k]) score += 1;
+    }
+  }
+  return score;
+}
+
+function pickCase() {
+  const cond = nowConditions();
+  const scored = CASES.map(c => ({ c, score: scoreCase(c, cond) }));
+
+  /* Penalise recently-shown cases */
+  scored.forEach(x => {
+    const idx = STORY.recentlyShown.indexOf(x.c.id);
+    if (idx === 0) x.score -= 100; /* never repeat the very last one */
+    else if (idx > 0) x.score -= (5 - idx);
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+  const leader = scored[0].score;
+  /* Only randomise among cases within 2 points of the leader. Anything further
+     behind is a meaningfully worse fit and should not be chosen. */
+  const top = scored.filter(x => x.score >= leader - 2);
+  return top[Math.floor(Math.random() * top.length)].c;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ENGRAVING — SVG renderers (same as before, condensed)
+   ═══════════════════════════════════════════════════════════════════════════ */
+const INK = '#1a140c', PAPER = '#e3d8bd';
+let _s = 1;
+function sr() { _s = ((_s * 1664525 + 1013904223) & 0xffffffff) >>> 0; return _s / 4294967295; }
+function seedRand(v) { _s = (v|0) || 1; }
+let _cid = 0;
+function uid(p) { _cid++; return p + '_' + _cid; }
+function hatch(clipShape, x, y, w, h, angle, spacing, sw) {
+  const id = uid('h');
+  const rad = angle * Math.PI / 180, cos = Math.cos(rad), sin = Math.sin(rad);
+  const diag = Math.ceil(Math.sqrt(w*w + h*h)) + 20;
+  const ox = x + w/2, oy = y + h/2;
+  let lines = '';
+  for (let d = -diag; d <= diag; d += spacing) {
+    const px = ox + cos*d, py = oy + sin*d;
+    lines += `<line x1="${(px-sin*diag).toFixed(1)}" y1="${(py+cos*diag).toFixed(1)}" x2="${(px+sin*diag).toFixed(1)}" y2="${(py-cos*diag).toFixed(1)}" stroke="${INK}" stroke-width="${sw}"/>`;
+  }
+  return `<defs><clipPath id="${id}">${clipShape}</clipPath></defs><g clip-path="url(#${id})">${lines}</g>`;
+}
+function frame(w, h) {
+  const m = 6;
+  let s = `<rect x="${m}" y="${m}" width="${w-m*2}" height="${h-m*2}" fill="none" stroke="${INK}" stroke-width="2"/>`;
+  s += `<rect x="${m+5}" y="${m+5}" width="${w-m*2-10}" height="${h-m*2-10}" fill="none" stroke="${INK}" stroke-width="0.6"/>`;
+  const dia = (cx,cy) => `<path d="M${cx},${cy-3} L${cx+3},${cy} L${cx},${cy+3} L${cx-3},${cy} Z" fill="${INK}"/>`;
+  s += dia(m+5,m+5)+dia(w-m-5,m+5)+dia(m+5,h-m-5)+dia(w-m-5,h-m-5);
+  return s;
+}
+
+function svgCityscape(s0) {
+  seedRand(s0);
+  const W_ = 520, H = 220;
+  const c = nowConditions();
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+  /* sky */
+  if (c.is_dark) {
+    s += hatch(`<rect x="0" y="12" width="${W_}" height="110"/>`, 0, 12, W_, 110, 65, 2.2, 0.55);
+    for (let i=0; i<12; i++) {
+      const sx = 30+sr()*(W_-60), sy = 16+sr()*50;
+      s += `<circle cx="${sx.toFixed(0)}" cy="${sy.toFixed(0)}" r="1.4" fill="${PAPER}"/>`;
+      s += `<circle cx="${sx.toFixed(0)}" cy="${sy.toFixed(0)}" r="0.5" fill="${INK}"/>`;
+    }
+    s += `<circle cx="410" cy="40" r="12" fill="${PAPER}" stroke="${INK}" stroke-width="0.8"/>`;
+  } else if (c.is_overcast) {
+    s += hatch(`<rect x="0" y="12" width="${W_}" height="110"/>`, 0, 12, W_, 110, 65, 4, 0.5);
+  } else {
+    s += hatch(`<rect x="0" y="12" width="${W_}" height="35"/>`, 0, 12, W_, 35, 65, 7, 0.4);
+  }
+  /* skyline */
+  const horizon = 122;
+  const blds = [
+    {x:6,y:90,w:18,h:32},{x:28,y:82,w:16,h:40},
+    {cx:60,base:122,h:42,w:18,t:'church'},
+    {x:86,y:96,w:20,h:26},{x:110,y:88,w:16,h:34},
+    {x:140,y:80,w:24,h:42},{x:170,y:90,w:18,h:32},
+    {x:260,y:82,w:22,h:40},{x:286,y:74,w:18,h:48},
+    {cx:320,base:122,h:48,w:14,t:'gherkin'},
+    {x:344,y:90,w:22,h:32,t:'walkie'},
+    {cx:378,base:122,h:68,w:20,t:'shard'},
+    {x:404,y:96,w:14,h:26},{x:422,y:90,w:20,h:32},
+    {x:448,y:100,w:16,h:22},{x:470,y:88,w:24,h:34}
+  ];
+  blds.forEach(b => {
+    if (b.t === 'shard') s += `<path d="M${b.cx-b.w/2},${b.base} L${b.cx},${b.base-b.h} L${b.cx+b.w/2},${b.base} Z" fill="${INK}"/>`;
+    else if (b.t === 'gherkin') {
+      s += `<ellipse cx="${b.cx}" cy="${b.base-b.h*0.5}" rx="${b.w/2}" ry="${b.h*0.5}" fill="${INK}"/>`;
+      s += `<rect x="${b.cx-b.w/2}" y="${b.base-b.h*0.5}" width="${b.w}" height="${b.h*0.5}" fill="${INK}"/>`;
+    } else if (b.t === 'walkie') {
+      s += `<path d="M${b.x},${b.y+b.h} L${b.x+1},${b.y+b.h*0.4} L${b.x+b.w*0.1},${b.y} L${b.x+b.w},${b.y} L${b.x+b.w-1},${b.y+b.h*0.4} L${b.x+b.w},${b.y+b.h} Z" fill="${INK}"/>`;
+    } else if (b.t === 'church') {
+      s += `<rect x="${b.cx-b.w/2}" y="${b.base-b.h*0.65}" width="${b.w}" height="${b.h*0.65}" fill="${INK}"/>`;
+      s += `<path d="M${b.cx-b.w/2},${b.base-b.h*0.65} L${b.cx},${b.base-b.h-2} L${b.cx+b.w/2},${b.base-b.h*0.65} Z" fill="${INK}"/>`;
+      s += `<line x1="${b.cx}" y1="${b.base-b.h-8}" x2="${b.cx}" y2="${b.base-b.h-2}" stroke="${INK}" stroke-width="1"/>`;
+    } else {
+      s += `<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" fill="${INK}"/>`;
+      const cols = Math.max(1, Math.floor(b.w/6)), rows = Math.max(1, Math.floor(b.h/8));
+      for (let r=0; r<rows; r++) for (let cc=0; cc<cols; cc++) {
+        if (sr() > 0.55) {
+          const wx = b.x+2+cc*6, wy = b.y+3+r*8;
+          if (wx+2 < b.x+b.w && wy+3 < b.y+b.h) s += `<rect x="${wx}" y="${wy}" width="2" height="3" fill="${PAPER}"/>`;
+        }
+      }
+    }
+  });
+  /* tower bridge */
+  const t1x=196, t2x=240, tw=22;
+  function tower(cx) {
+    return `<rect x="${cx-tw/2}" y="${horizon+8}" width="${tw}" height="${H-horizon-26}" fill="${INK}"/>`+
+           `<rect x="${cx-tw/2-2}" y="${horizon-38}" width="${tw+4}" height="46" fill="${INK}"/>`+
+           `<rect x="${cx-tw/2+1}" y="${horizon-62}" width="${tw-2}" height="24" fill="${INK}"/>`+
+           `<path d="M${cx-tw/2-1},${horizon-62} L${cx},50 L${cx+tw/2+1},${horizon-62} Z" fill="${INK}"/>`+
+           `<line x1="${cx}" y1="50" x2="${cx}" y2="42" stroke="${INK}" stroke-width="1.4"/>`+
+           `<rect x="${cx-3}" y="${horizon-50}" width="6" height="8" fill="${PAPER}"/>`+
+           `<rect x="${cx-3}" y="${horizon-26}" width="6" height="8" fill="${PAPER}"/>`;
+  }
+  s += tower(t1x) + tower(t2x);
+  s += `<rect x="${t1x+tw/2}" y="${horizon-50}" width="${t2x-t1x-tw}" height="6" fill="${INK}"/>`;
+  s += `<rect x="${t1x+tw/2}" y="${horizon-2}" width="${t2x-t1x-tw}" height="10" fill="${INK}"/>`;
+  s += `<rect x="0" y="${horizon-2}" width="${t1x-tw/2}" height="10" fill="${INK}"/>`;
+  s += `<rect x="${t2x+tw/2}" y="${horizon-2}" width="${W_-t2x-tw/2}" height="10" fill="${INK}"/>`;
+  /* bus */
+  const bx = 80 + (Date.now()/1000 % 60)/60 * 280, by = horizon - 14;
+  s += `<rect x="${bx}" y="${by}" width="34" height="12" fill="${INK}"/>`;
+  s += `<rect x="${bx+1}" y="${by-6}" width="32" height="6" fill="${INK}"/>`;
+  for (let i=0;i<4;i++) {
+    s += `<rect x="${bx+3+i*8}" y="${by-4}" width="3" height="3" fill="${PAPER}"/>`;
+    s += `<rect x="${bx+3+i*8}" y="${by+2}" width="3" height="3" fill="${PAPER}"/>`;
+  }
+  s += `<circle cx="${bx+7}" cy="${by+13}" r="2.2" fill="${INK}"/>`;
+  s += `<circle cx="${bx+27}" cy="${by+13}" r="2.2" fill="${INK}"/>`;
+  s += `<text x="${bx+17}" y="${by-1}" text-anchor="middle" font-family="serif" font-size="3.8" fill="${PAPER}">343</text>`;
+  /* river */
+  const ry = horizon + 8;
+  s += `<rect x="0" y="${ry}" width="${W_}" height="${H-ry-6}" fill="${PAPER}"/>`;
+  for (let y = ry+5; y < H-8; y += 5) {
+    let x = 0;
+    while (x < W_) {
+      const len = 8+sr()*22, gap = 3+sr()*8;
+      const skip = (x>t1x-tw/2-2 && x<t1x+tw/2+2) || (x>t2x-tw/2-2 && x<t2x+tw/2+2);
+      if (!skip) s += `<line x1="${x.toFixed(0)}" y1="${y}" x2="${(x+len).toFixed(0)}" y2="${y}" stroke="${INK}" stroke-width="0.6"/>`;
+      x += len + gap;
+    }
+  }
+  if (c.is_raining) {
+    for (let i=0;i<50;i++) {
+      const rx=sr()*W_, rry=sr()*(H-30);
+      s += `<line x1="${rx.toFixed(0)}" y1="${rry.toFixed(0)}" x2="${(rx+3).toFixed(0)}" y2="${(rry+10).toFixed(0)}" stroke="${INK}" stroke-width="0.4" opacity="0.55"/>`;
+    }
+  }
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+function svgInterior(s0) {
+  seedRand(s0);
+  const W_=520, H=220;
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+  const fy = 160;
+  s += `<line x1="20" y1="${fy}" x2="${W_-20}" y2="${fy}" stroke="${INK}" stroke-width="1.5"/>`;
+  s += hatch(`<rect x="20" y="20" width="${W_-40}" height="${fy-20}"/>`, 20, 20, W_-40, fy-20, 90, 8, 0.4);
+  for (let y=fy+8; y<H-12; y+=12) s += `<line x1="20" y1="${y}" x2="${W_-20}" y2="${y}" stroke="${INK}" stroke-width="0.4"/>`;
+  /* window */
+  const wx=320,wy=35,ww=130,wh=80;
+  s += `<rect x="${wx-4}" y="${wy-4}" width="${ww+8}" height="${wh+8}" fill="${INK}"/>`;
+  s += `<rect x="${wx}" y="${wy}" width="${ww}" height="${wh}" fill="${PAPER}"/>`;
+  s += `<rect x="${wx+ww/2-2}" y="${wy}" width="4" height="${wh}" fill="${INK}"/>`;
+  s += `<rect x="${wx}" y="${wy+wh/2-2}" width="${ww}" height="4" fill="${INK}"/>`;
+  s += hatch(`<rect x="${wx}" y="${wy}" width="${ww}" height="${wh}"/>`, wx, wy, ww, wh, 65, 5, 0.4);
+  /* desk */
+  const dx=60,dy=110,dw=180,dh=14;
+  s += `<rect x="${dx}" y="${dy}" width="${dw}" height="${dh}" fill="${INK}"/>`;
+  s += `<rect x="${dx+4}" y="${dy+dh}" width="6" height="${fy-dy-dh}" fill="${INK}"/>`;
+  s += `<rect x="${dx+dw-10}" y="${dy+dh}" width="6" height="${fy-dy-dh}" fill="${INK}"/>`;
+  s += `<rect x="${dx+30}" y="${dy+dh+4}" width="${dw-50}" height="14" fill="${INK}"/>`;
+  /* lamp */
+  const lx=dx+16, ly=dy-22;
+  s += `<rect x="${lx-1}" y="${ly}" width="3" height="22" fill="${INK}"/>`;
+  s += `<path d="M${lx-10},${ly-2} L${lx+12},${ly-2} L${lx+8},${ly-12} L${lx-6},${ly-12} Z" fill="${INK}"/>`;
+  s += `<ellipse cx="${lx+1}" cy="${dy-1}" rx="22" ry="3" fill="${PAPER}" opacity="0.6"/>`;
+  /* papers */
+  s += `<rect x="${dx+60}" y="${dy-3}" width="40" height="2" fill="${PAPER}"/>`;
+  s += `<rect x="${dx+58}" y="${dy-1}" width="44" height="2" fill="${PAPER}"/>`;
+  /* chair */
+  const chx = dx + dw/2 - 16, chy = dy - 10;
+  s += `<rect x="${chx}" y="${chy}" width="32" height="6" fill="${INK}"/>`;
+  s += `<rect x="${chx+2}" y="${chy-32}" width="6" height="32" fill="${INK}"/>`;
+  s += `<rect x="${chx+24}" y="${chy-32}" width="6" height="32" fill="${INK}"/>`;
+  s += `<rect x="${chx+8}" y="${chy-26}" width="14" height="3" fill="${INK}"/>`;
+  /* door ajar */
+  const drx = W_-70, dry=60;
+  s += `<rect x="${drx-3}" y="${dry-3}" width="46" height="100" fill="${INK}"/>`;
+  s += `<rect x="${drx}" y="${dry}" width="40" height="94" fill="${PAPER}"/>`;
+  s += `<path d="M${drx},${dry} L${drx+10},${dry+4} L${drx+10},${dry+90} L${drx},${dry+94} Z" fill="${INK}"/>`;
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+function svgNotebook(s0, notes) {
+  seedRand(s0);
+  const W_=520, H=220;
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="#e8dec0"/>`;
+  for (let y=50; y<H-10; y+=18) s += `<line x1="20" y1="${y}" x2="${W_-20}" y2="${y}" stroke="${INK}" stroke-width="0.3" opacity="0.4"/>`;
+  s += `<line x1="62" y1="20" x2="62" y2="${H-15}" stroke="#5a1a1a" stroke-width="0.6" opacity="0.6"/>`;
+  const ds = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long' });
+  const ts = new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+  s += `<text x="72" y="34" font-family="Special Elite, monospace" font-size="11" fill="${INK}">MEMO. ${ds.toUpperCase()} — ${ts}</text>`;
+  s += `<line x1="72" y1="38" x2="${W_-30}" y2="38" stroke="${INK}" stroke-width="0.5"/>`;
+  let y = 56;
+  notes.slice(0,7).forEach(note => {
+    let text = note, strike=false, under=false;
+    if (text.startsWith('[strike]')) { strike=true; text=text.slice(8); }
+    if (text.startsWith('[under]'))  { under=true;  text=text.slice(7); }
+    if (text.length > 56) text = text.slice(0,55) + '…';
+    s += `<text x="72" y="${y+12}" font-family="Special Elite, monospace" font-size="10" fill="${INK}">${escapeXml(text)}</text>`;
+    if (strike) s += `<line x1="72" y1="${y+8}" x2="${72+text.length*5.5}" y2="${y+8}" stroke="${INK}" stroke-width="1"/>`;
+    if (under)  s += `<line x1="72" y1="${y+14}" x2="${72+text.length*5.5}" y2="${y+14}" stroke="${INK}" stroke-width="0.6"/>`;
+    y += 18;
+  });
+  s += `<text x="${W_-35}" y="${H-22}" font-family="Special Elite, monospace" font-size="13" fill="${INK}" text-anchor="end" font-style="italic">— J.H.</text>`;
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+function svgMap(s0, markedStop) {
+  seedRand(s0);
+  const W_=520, H=220;
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+  s += `<text x="${W_/2}" y="30" text-anchor="middle" font-family="UnifrakturCook, serif" font-size="18" fill="${INK}">A Map of the Line</text>`;
+  /* compass */
+  const cx=W_-40, cy=50, cr=16;
+  s += `<circle cx="${cx}" cy="${cy}" r="${cr}" fill="${PAPER}" stroke="${INK}" stroke-width="0.7"/>`;
+  s += `<path d="M${cx},${cy-cr+2} L${cx-2.5},${cy} L${cx},${cy+cr-2} L${cx+2.5},${cy} Z" fill="${INK}"/>`;
+  s += `<text x="${cx}" y="${cy-cr-2}" text-anchor="middle" font-family="serif" font-size="6" fill="${INK}">N</text>`;
+  /* texture */
+  for (let i=0;i<150;i++) {
+    const px=sr()*W_, py=50+sr()*(H-80);
+    s += `<circle cx="${px.toFixed(0)}" cy="${py.toFixed(0)}" r="0.4" fill="${INK}" opacity="0.35"/>`;
+  }
+  const path = [
+    {name:'New Cross',short:'N. Cross',x:60,y:175},
+    {name:'Peckham',short:'Peckham',x:140,y:155},
+    {name:'Camberwell',short:"C'well",x:210,y:135},
+    {name:'Elephant & Castle',short:'Elephant',x:280,y:115},
+    {name:'Borough',short:'Borough',x:340,y:95},
+    {name:'London Bridge',short:'L. Bridge',x:400,y:78},
+    {name:'Tower Bridge',short:'Tower',x:450,y:65},
+    {name:'Aldgate',short:'Aldgate',x:480,y:50}
+  ];
+  let pd = `M${path[0].x},${path[0].y}`;
+  for (let i=1;i<path.length;i++) {
+    const p=path[i-1], q=path[i], mx=(p.x+q.x)/2;
+    pd += ` Q${mx},${p.y} ${q.x},${q.y}`;
+  }
+  s += `<path d="${pd}" fill="none" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>`;
+  s += `<path d="${pd}" fill="none" stroke="${PAPER}" stroke-width="2.5" stroke-linecap="round"/>`;
+  s += `<path d="${pd}" fill="none" stroke="${INK}" stroke-width="0.6" stroke-dasharray="3,3"/>`;
+  path.forEach((p, i) => {
+    const marked = markedStop && (markedStop.includes(p.name) || p.name.includes(markedStop));
+    s += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${PAPER}" stroke="${INK}" stroke-width="1.3"/>`;
+    s += `<circle cx="${p.x}" cy="${p.y}" r="1.6" fill="${INK}"/>`;
+    if (marked) {
+      const sx=p.x, sy=p.y-14;
+      s += `<line x1="${sx-5}" y1="${sy-5}" x2="${sx+5}" y2="${sy+5}" stroke="#5a1a1a" stroke-width="2"/>`;
+      s += `<line x1="${sx-5}" y1="${sy+5}" x2="${sx+5}" y2="${sy-5}" stroke="#5a1a1a" stroke-width="2"/>`;
+      s += `<text x="${sx}" y="${sy-8}" text-anchor="middle" font-family="Special Elite, monospace" font-size="7" fill="#5a1a1a">SCENE</text>`;
+    }
+    const ly = i % 2 === 0 ? p.y+14 : p.y-8;
+    s += `<text x="${p.x}" y="${ly}" text-anchor="middle" font-family="IM Fell English, serif" font-style="italic" font-size="8" fill="${INK}">${escapeXml(p.short)}</text>`;
+  });
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+function svgStreet(s0) {
+  seedRand(s0);
+  const W_=520, H=220;
+  const c = nowConditions();
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+  if (c.is_dark) s += hatch(`<rect x="0" y="12" width="${W_}" height="100"/>`, 0, 12, W_, 100, 65, 2.4, 0.5);
+  else s += hatch(`<rect x="0" y="12" width="${W_}" height="40"/>`, 0, 12, W_, 40, 65, 6, 0.4);
+  /* terrace */
+  const baseY=150;
+  let cx=14;
+  while (cx < W_-14) {
+    const hw=50+Math.floor(sr()*30), hh=60+Math.floor(sr()*20), top=baseY-hh;
+    s += `<rect x="${cx}" y="${top}" width="${hw}" height="${hh}" fill="${INK}"/>`;
+    s += `<path d="M${cx-2},${top} L${cx+hw/2},${top-10} L${cx+hw+2},${top} Z" fill="${INK}"/>`;
+    const chx = cx + hw*0.7;
+    s += `<rect x="${chx}" y="${top-18}" width="5" height="12" fill="${INK}"/>`;
+    s += `<rect x="${chx-1}" y="${top-20}" width="7" height="3" fill="${INK}"/>`;
+    /* windows */
+    const wRows = hh>80?3:2, wCols = hw>60?2:1;
+    for (let r=0;r<wRows;r++) for (let cc=0;cc<wCols;cc++) {
+      const wpx = cx+8+cc*((hw-16)/wCols), wpy = top+8+r*((hh-16)/wRows);
+      const wsw = (hw-16)/(wCols*2), wsh=9;
+      const lit = c.is_dark ? sr() > 0.55 : true;
+      if (lit) {
+        s += `<rect x="${wpx}" y="${wpy}" width="${wsw}" height="${wsh}" fill="${PAPER}"/>`;
+        s += `<line x1="${wpx+wsw/2}" y1="${wpy}" x2="${wpx+wsw/2}" y2="${wpy+wsh}" stroke="${INK}" stroke-width="0.4"/>`;
+      }
+    }
+    cx += hw - 1;
+  }
+  /* pavement & road */
+  s += `<rect x="0" y="${baseY}" width="${W_}" height="14" fill="${PAPER}"/>`;
+  s += `<line x1="0" y1="${baseY}" x2="${W_}" y2="${baseY}" stroke="${INK}" stroke-width="1.2"/>`;
+  s += `<line x1="0" y1="${baseY+14}" x2="${W_}" y2="${baseY+14}" stroke="${INK}" stroke-width="1.2"/>`;
+  for (let i=0;i<14;i++) s += `<line x1="${i*W_/14+5}" y1="${baseY}" x2="${i*W_/14+5}" y2="${baseY+14}" stroke="${INK}" stroke-width="0.4"/>`;
+  s += `<rect x="0" y="${baseY+14}" width="${W_}" height="${H-baseY-14-8}" fill="${INK}"/>`;
+  for (let i=0;i<8;i++) s += `<rect x="${20+i*60}" y="${baseY+30}" width="20" height="2" fill="${PAPER}"/>`;
+  /* lamp */
+  const lampX=360;
+  s += `<rect x="${lampX}" y="${baseY-65}" width="2.5" height="65" fill="${INK}"/>`;
+  s += `<path d="M${lampX-1},${baseY-65} q-4,-3 -8,0 q-1,1 0,3 l10,0" fill="${INK}"/>`;
+  s += `<rect x="${lampX-9}" y="${baseY-66}" width="6" height="6" fill="${INK}"/>`;
+  if (c.is_dark) {
+    s += `<circle cx="${lampX-6}" cy="${baseY-63}" r="3.5" fill="${PAPER}" stroke="${INK}" stroke-width="0.5"/>`;
+    for (let a=0;a<8;a++) {
+      const ang=a/8*Math.PI*2;
+      s += `<line x1="${lampX-6+Math.cos(ang)*5}" y1="${baseY-63+Math.sin(ang)*5}" x2="${lampX-6+Math.cos(ang)*9}" y2="${baseY-63+Math.sin(ang)*9}" stroke="${INK}" stroke-width="0.6"/>`;
+    }
+    s += `<ellipse cx="${lampX-6}" cy="${baseY+8}" rx="22" ry="5" fill="${PAPER}" opacity="0.5"/>`;
+  }
+  if (c.is_raining) {
+    for (let i=0;i<60;i++) {
+      const rx=sr()*W_, ry=sr()*(H-20);
+      s += `<line x1="${rx.toFixed(0)}" y1="${ry.toFixed(0)}" x2="${(rx+3).toFixed(0)}" y2="${(ry+10).toFixed(0)}" stroke="${INK}" stroke-width="0.4" opacity="0.5"/>`;
+    }
+  }
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   svgTree — a single tree against the sky, with pollen drift in the air.
+   The tree of pollen narrators. By default a birch (white trunk with
+   horizontal black markings); other species can override the trunk.
+   ───────────────────────────────────────────────────────────────────── */
+function svgTree(s0, species) {
+  seedRand(s0);
+  species = species || 'birch';
+  const W_ = 520, H = 220;
+  const c = nowConditions();
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+
+  /* sky — sparse hatching at top, more if overcast */
+  if (c.is_overcast) s += hatch(`<rect x="0" y="12" width="${W_}" height="80"/>`, 0, 12, W_, 80, 65, 4, 0.45);
+  else s += hatch(`<rect x="0" y="12" width="${W_}" height="40"/>`, 0, 12, W_, 40, 65, 7, 0.4);
+
+  /* Distant rooftops — set behind the tree, lower than before so trunk dominates. */
+  const roofBase = 158;
+  for (let i = 0; i < 9; i++) {
+    const rx = 14 + i * 56, rh = 24 + Math.floor(sr() * 12);
+    const ry = roofBase - rh, rw = 50;
+    s += `<rect x="${rx}" y="${ry}" width="${rw}" height="${rh}" fill="${INK}"/>`;
+    s += `<path d="M${rx-1},${ry} L${rx+rw/2},${ry-6} L${rx+rw+1},${ry} Z" fill="${INK}"/>`;
+    if (sr() > 0.4) {
+      const chx = rx + rw * 0.7;
+      s += `<rect x="${chx}" y="${ry-9}" width="3" height="7" fill="${INK}"/>`;
+    }
+  }
+
+  /* Pavement and ground — at the bottom of the panel */
+  const groundY = 180;
+  s += `<rect x="0" y="${groundY}" width="${W_}" height="${H-groundY-6}" fill="${PAPER}"/>`;
+  s += `<line x1="0" y1="${groundY}" x2="${W_}" y2="${groundY}" stroke="${INK}" stroke-width="1"/>`;
+  for (let i = 0; i < 14; i++) {
+    s += `<line x1="${i*W_/14 + 5}" y1="${groundY}" x2="${i*W_/14 + 5}" y2="${groundY+8}" stroke="${INK}" stroke-width="0.4"/>`;
+  }
+
+  /* THE TREE — drawn IN FRONT of everything else.
+     Trunk: an organic tapered shape, not a rectangle. Wider at base,
+     narrowing as it rises. */
+  const trunkX = 130;
+  const trunkBase = groundY;
+  const trunkTop = 60;
+  const trunkBaseW = 28;
+  const trunkTopW = 16;
+
+  /* Trunk as a tapered shape */
+  const trunkPath = `M${trunkX-trunkBaseW/2},${trunkBase} L${trunkX-trunkTopW/2},${trunkTop} L${trunkX+trunkTopW/2},${trunkTop} L${trunkX+trunkBaseW/2},${trunkBase} Z`;
+
+  if (species === 'birch') {
+    s += `<path d="${trunkPath}" fill="${PAPER}" stroke="${INK}" stroke-width="1.4"/>`;
+    /* horizontal black markings — irregular chevrons, not a ladder */
+    for (let y = trunkTop + 14; y < trunkBase - 8; y += 11 + Math.floor(sr() * 6)) {
+      /* trunk width at this y, interpolated */
+      const t = (y - trunkTop) / (trunkBase - trunkTop);
+      const wHere = trunkTopW + (trunkBaseW - trunkTopW) * t;
+      /* chevron occupies a fraction of width, randomly offset */
+      const chevW = wHere * (0.4 + sr() * 0.45);
+      const chevOff = (sr() - 0.5) * (wHere - chevW - 4);
+      s += `<rect x="${trunkX - chevW/2 + chevOff}" y="${y}" width="${chevW}" height="${1 + Math.floor(sr() * 1.5)}" fill="${INK}"/>`;
+      /* a smaller subsidiary mark sometimes */
+      if (sr() > 0.6) {
+        const sw = chevW * 0.3;
+        const so = chevOff + (sr() - 0.5) * (wHere * 0.4);
+        s += `<rect x="${trunkX - sw/2 + so}" y="${y - 2}" width="${sw}" height="1" fill="${INK}"/>`;
+      }
+    }
+    /* signature splitting fork at the top of the trunk */
+    s += `<line x1="${trunkX-trunkTopW/4}" y1="${trunkTop}" x2="${trunkX-trunkTopW/2-4}" y2="${trunkTop-6}" stroke="${INK}" stroke-width="2.5"/>`;
+    s += `<line x1="${trunkX+trunkTopW/4}" y1="${trunkTop}" x2="${trunkX+trunkTopW/2+4}" y2="${trunkTop-6}" stroke="${INK}" stroke-width="2.5"/>`;
+  } else {
+    s += `<path d="${trunkPath}" fill="${INK}"/>`;
+  }
+
+  /* Branches — a network of black strokes radiating from the top of the trunk */
+  const branchOrigin = { x: trunkX, y: trunkTop };
+  const branches = [
+    { to: { x: 50,  y: 38 }, w: 3 },
+    { to: { x: 90,  y: 24 }, w: 3 },
+    { to: { x: 138, y: 18 }, w: 3.5 },
+    { to: { x: 200, y: 22 }, w: 3 },
+    { to: { x: 260, y: 32 }, w: 3 },
+    { to: { x: 320, y: 50 }, w: 2.5 },
+    { to: { x: 240, y: 80 }, w: 2 },
+    { to: { x: 60,  y: 90 }, w: 2 }
+  ];
+  branches.forEach(b => {
+    s += `<line x1="${branchOrigin.x}" y1="${branchOrigin.y}" x2="${b.to.x}" y2="${b.to.y}" stroke="${INK}" stroke-width="${b.w}" stroke-linecap="round"/>`;
+    /* twigs branching off the upper half of each branch */
+    const dx = b.to.x - branchOrigin.x, dy = b.to.y - branchOrigin.y;
+    for (let i = 0; i < 5; i++) {
+      const t = 0.4 + sr() * 0.55;
+      const bx = branchOrigin.x + dx * t;
+      const by = branchOrigin.y + dy * t;
+      const angle = Math.atan2(dy, dx) + (sr() - 0.5) * 1.4;
+      const len = 8 + sr() * 14;
+      s += `<line x1="${bx.toFixed(1)}" y1="${by.toFixed(1)}" x2="${(bx + Math.cos(angle)*len).toFixed(1)}" y2="${(by + Math.sin(angle)*len).toFixed(1)}" stroke="${INK}" stroke-width="${(b.w*0.6).toFixed(1)}" stroke-linecap="round"/>`;
+      /* second-order twiglet from each twig */
+      if (sr() > 0.4) {
+        const tx = bx + Math.cos(angle)*len, ty = by + Math.sin(angle)*len;
+        const ang2 = angle + (sr() - 0.5) * 1.6;
+        const len2 = 4 + sr() * 6;
+        s += `<line x1="${tx.toFixed(1)}" y1="${ty.toFixed(1)}" x2="${(tx + Math.cos(ang2)*len2).toFixed(1)}" y2="${(ty + Math.sin(ang2)*len2).toFixed(1)}" stroke="${INK}" stroke-width="${(b.w*0.4).toFixed(1)}" stroke-linecap="round"/>`;
+      }
+    }
+  });
+
+  /* Leaf-mass — cluster of small leaf-shapes (almond / oval) rather than dots,
+     concentrated around branch tips. */
+  for (let i = 0; i < 65; i++) {
+    const lx = 30 + sr() * 290;
+    const ly = 14 + sr() * 90;
+    /* almond leaf shape */
+    const ang = (sr() - 0.5) * 2;
+    const lw = 1.2 + sr() * 0.8;
+    const lh = 2.5 + sr() * 1.5;
+    s += `<g transform="translate(${lx.toFixed(1)},${ly.toFixed(1)}) rotate(${(ang*30).toFixed(0)})"><ellipse cx="0" cy="0" rx="${lw.toFixed(1)}" ry="${lh.toFixed(1)}" fill="${INK}" opacity="0.85"/></g>`;
+  }
+
+  /* Pollen drift — fine dots and small directional strokes drifting on the wind.
+     Density scales with live pollen count. Drift goes to the right of the tree
+     so leaves and pollen don't visually compete in the same area. */
+  const pollenSum = (W.air?.birch_pollen||0) + (W.air?.alder_pollen||0) + (W.air?.grass_pollen||0) + (W.air?.olive_pollen||0) + (W.air?.mugwort_pollen||0) + (W.air?.ragweed_pollen||0);
+  const pollenCount = Math.min(140, Math.floor(30 + pollenSum * 1.4));
+  const wind = W.weather?.wind_speed_10m || 6;
+  const driftAngle = wind > 5 ? -10 : -3;
+  for (let i = 0; i < pollenCount; i++) {
+    const px = 250 + sr() * 260;
+    const py = 30 + sr() * 130;
+    const drift = wind > 10 ? 5 + sr()*3 : 2 + sr()*1;
+    const a = driftAngle * Math.PI / 180;
+    const dx = Math.cos(a) * drift;
+    const dy = Math.sin(a) * drift;
+    s += `<line x1="${px.toFixed(1)}" y1="${py.toFixed(1)}" x2="${(px+dx).toFixed(1)}" y2="${(py+dy).toFixed(1)}" stroke="${INK}" stroke-width="0.4" opacity="0.55" stroke-linecap="round"/>`;
+  }
+
+  /* small bench at foot of tree */
+  const benchX = 220, benchY = groundY - 10;
+  s += `<rect x="${benchX}" y="${benchY}" width="46" height="3" fill="${INK}"/>`;
+  s += `<rect x="${benchX+2}" y="${benchY+3}" width="3" height="7" fill="${INK}"/>`;
+  s += `<rect x="${benchX+41}" y="${benchY+3}" width="3" height="7" fill="${INK}"/>`;
+  s += `<rect x="${benchX+5}" y="${benchY-8}" width="36" height="2" fill="${INK}"/>`;
+  s += `<rect x="${benchX+22}" y="${benchY-8}" width="2" height="11" fill="${INK}"/>`;
+
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   svgBusInterior — looking forward down the upper deck of a 343.
+   Two rows of seat-backs receding to the windscreen. Side windows
+   showing the road outside. The bus's own viewpoint of itself.
+   ───────────────────────────────────────────────────────────────────── */
+function svgBusInterior(s0) {
+  seedRand(s0);
+  const W_ = 520, H = 220;
+  const c = nowConditions();
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+
+  /* Vanishing point at the front-centre */
+  const vpX = W_ / 2;
+  const vpY = 110;
+
+  /* Ceiling — hatched lightly for tone, with the converging perspective
+     lines drawn over. */
+  s += hatch(`<polygon points="0,12 ${W_},12 ${vpX+30},${vpY-10} ${vpX-30},${vpY-10}"/>`,
+             0, 12, W_, vpY-22, 90, 8, 0.4);
+  s += `<line x1="0" y1="12" x2="${vpX-30}" y2="${vpY-10}" stroke="${INK}" stroke-width="1"/>`;
+  s += `<line x1="${W_}" y1="12" x2="${vpX+30}" y2="${vpY-10}" stroke="${INK}" stroke-width="1"/>`;
+  s += `<line x1="${vpX-30}" y1="${vpY-10}" x2="${vpX+30}" y2="${vpY-10}" stroke="${INK}" stroke-width="1"/>`;
+
+  /* Side window strip — a band running along each wall, between the
+     ceiling and the seat-tops. Drawn as a single trapezium per side. */
+  const winNearY1 = 30,  winNearY2 = 70;   /* near edge: y of top & bottom */
+  const winFarY1  = vpY-8, winFarY2 = vpY+8;
+  /* left strip */
+  const leftStrip = `M0,${winNearY1} L${vpX-30},${winFarY1} L${vpX-30},${winFarY2} L0,${winNearY2} Z`;
+  s += `<path d="${leftStrip}" fill="${PAPER}" stroke="${INK}" stroke-width="1"/>`;
+  /* hatching inside left strip — vertical because the wall is fast-moving */
+  s += hatch(`<path d="${leftStrip}"/>`, 0, winNearY1, vpX-30, winNearY2-winNearY1, 90, 8, 0.4);
+  /* mullions inside left strip — 3 vertical dividers receding */
+  for (let i = 1; i < 4; i++) {
+    const t = i / 4;
+    const x1 = (vpX - 30) * t;
+    const yTop = winNearY1 + (winFarY1 - winNearY1) * t;
+    const yBot = winNearY2 + (winFarY2 - winNearY2) * t;
+    s += `<line x1="${x1.toFixed(1)}" y1="${yTop.toFixed(1)}" x2="${x1.toFixed(1)}" y2="${yBot.toFixed(1)}" stroke="${INK}" stroke-width="0.7"/>`;
+  }
+  /* right strip — mirror */
+  const rightStrip = `M${W_},${winNearY1} L${vpX+30},${winFarY1} L${vpX+30},${winFarY2} L${W_},${winNearY2} Z`;
+  s += `<path d="${rightStrip}" fill="${PAPER}" stroke="${INK}" stroke-width="1"/>`;
+  s += hatch(`<path d="${rightStrip}"/>`, vpX+30, winNearY1, W_-vpX-30, winNearY2-winNearY1, 90, 8, 0.4);
+  for (let i = 1; i < 4; i++) {
+    const t = i / 4;
+    const x1 = W_ - (W_ - (vpX + 30)) * t;
+    const yTop = winNearY1 + (winFarY1 - winNearY1) * t;
+    const yBot = winNearY2 + (winFarY2 - winNearY2) * t;
+    s += `<line x1="${x1.toFixed(1)}" y1="${yTop.toFixed(1)}" x2="${x1.toFixed(1)}" y2="${yBot.toFixed(1)}" stroke="${INK}" stroke-width="0.7"/>`;
+  }
+
+  /* The WINDSCREEN at the centre-front — drawn boldly so it reads */
+  const wsX = vpX - 32, wsY = vpY - 8, wsW = 64, wsH = 30;
+  s += `<rect x="${wsX-3}" y="${wsY-3}" width="${wsW+6}" height="${wsH+6}" fill="${INK}"/>`;
+  s += `<rect x="${wsX}" y="${wsY}" width="${wsW}" height="${wsH}" fill="${PAPER}"/>`;
+  /* through the windscreen — sky in upper portion, road in lower */
+  if (c.is_dark) {
+    s += hatch(`<rect x="${wsX}" y="${wsY}" width="${wsW}" height="${wsH*0.5}"/>`, wsX, wsY, wsW, wsH*0.5, 65, 2.4, 0.5);
+    /* a couple of distant lit windows */
+    for (let i = 0; i < 5; i++) {
+      const lx = wsX + 4 + sr() * (wsW - 8);
+      const ly = wsY + 3 + sr() * (wsH * 0.35);
+      s += `<rect x="${lx.toFixed(0)}" y="${ly.toFixed(0)}" width="2" height="2" fill="${PAPER}"/>`;
+    }
+  } else {
+    /* daytime: distant building silhouettes */
+    s += `<rect x="${wsX+4}" y="${wsY+8}" width="14" height="${wsH*0.32}" fill="${INK}"/>`;
+    s += `<rect x="${wsX+22}" y="${wsY+5}" width="10" height="${wsH*0.4}" fill="${INK}"/>`;
+    s += `<rect x="${wsX+36}" y="${wsY+9}" width="16" height="${wsH*0.32}" fill="${INK}"/>`;
+    s += `<rect x="${wsX+wsW-12}" y="${wsY+11}" width="8" height="${wsH*0.28}" fill="${INK}"/>`;
+  }
+  /* road through windscreen */
+  s += `<rect x="${wsX}" y="${wsY + wsH*0.5}" width="${wsW}" height="${wsH*0.5}" fill="${INK}"/>`;
+  /* dashed centre line */
+  s += `<rect x="${wsX + wsW/2 - 1}" y="${wsY + wsH*0.65}" width="2" height="3" fill="${PAPER}"/>`;
+  s += `<rect x="${wsX + wsW/2 - 1}" y="${wsY + wsH*0.85}" width="2" height="3" fill="${PAPER}"/>`;
+  /* horizon line */
+  s += `<line x1="${wsX}" y1="${wsY + wsH*0.5}" x2="${wsX+wsW}" y2="${wsY + wsH*0.5}" stroke="${INK}" stroke-width="0.6"/>`;
+
+  /* Floor — the aisle. Simple converging lines from lower corners towards
+     a point just below the windscreen. Floor is cream; we draw the
+     surrounding seat-back area in black to define the aisle shape. */
+  const floorVPY = vpY + 22;
+  /* Left seat-back block */
+  const leftBlock = `M0,${winNearY2} L${vpX-30},${winFarY2} L${vpX-40},${floorVPY} L0,${H-12} Z`;
+  s += `<path d="${leftBlock}" fill="${INK}"/>`;
+  /* Right seat-back block */
+  const rightBlock = `M${W_},${winNearY2} L${vpX+30},${winFarY2} L${vpX+40},${floorVPY} L${W_},${H-12} Z`;
+  s += `<path d="${rightBlock}" fill="${INK}"/>`;
+  /* Aisle at the bottom — visible cream strip between the two blocks */
+  const aisle = `M${vpX-40},${floorVPY} L${vpX+40},${floorVPY} L${W_*0.66},${H-12} L${W_*0.34},${H-12} Z`;
+  s += `<path d="${aisle}" fill="${PAPER}"/>`;
+  /* aisle floor hatching */
+  s += hatch(`<path d="${aisle}"/>`, vpX-100, floorVPY, 200, H-floorVPY-12, 0, 7, 0.4);
+
+  /* Seat-back divisions — clearer cream lines on the left/right blocks
+     suggesting individual seat tops receding. Three divisions per side. */
+  for (let i = 1; i <= 3; i++) {
+    const t = i / 4;
+    /* left block: from the wall (x=0) to the aisle inner edge */
+    const yL_wall = winNearY2 + (H - 12 - winNearY2) * t;
+    const xL_aisle = (vpX - 40) * t;
+    const yL_aisle = winNearY2 + (floorVPY - winNearY2) * t;
+    s += `<line x1="0" y1="${yL_wall.toFixed(1)}" x2="${xL_aisle.toFixed(1)}" y2="${yL_aisle.toFixed(1)}" stroke="${PAPER}" stroke-width="1.2" opacity="0.85"/>`;
+    /* right block: mirror */
+    const xR_aisle = W_ - (W_ - (vpX + 40)) * t;
+    const yR_aisle = winNearY2 + (floorVPY - winNearY2) * t;
+    s += `<line x1="${W_}" y1="${yL_wall.toFixed(1)}" x2="${xR_aisle.toFixed(1)}" y2="${yR_aisle.toFixed(1)}" stroke="${PAPER}" stroke-width="1.2" opacity="0.85"/>`;
+  }
+
+  /* A handrail — curved bar running down the centre of the ceiling */
+  s += `<line x1="${vpX-150}" y1="22" x2="${vpX-12}" y2="${vpY-12}" stroke="${INK}" stroke-width="2.5" stroke-linecap="round"/>`;
+  s += `<line x1="${vpX+150}" y1="22" x2="${vpX+12}" y2="${vpY-12}" stroke="${INK}" stroke-width="2.5" stroke-linecap="round"/>`;
+  /* hanging strap loops */
+  for (const sx of [vpX - 80, vpX + 80]) {
+    const yTop = 22 + Math.abs(sx - vpX) * 0.5;
+    s += `<line x1="${sx}" y1="${yTop}" x2="${sx}" y2="${yTop+22}" stroke="${INK}" stroke-width="0.8"/>`;
+    s += `<circle cx="${sx}" cy="${yTop+25}" r="3.5" fill="none" stroke="${INK}" stroke-width="0.9"/>`;
+  }
+
+  /* Stop-bell on the right, mounted on the side */
+  s += `<circle cx="${W_-40}" cy="58" r="6" fill="${INK}"/>`;
+  s += `<circle cx="${W_-40}" cy="58" r="3.5" fill="${PAPER}"/>`;
+  s += `<text x="${W_-40}" y="59.5" text-anchor="middle" font-family="serif" font-size="3.4" fill="${INK}">STOP</text>`;
+
+  /* A near-foreground seat-back fragment at the very bottom — close-up
+     suggesting we're looking past the back of a seat ahead of us. */
+  s += `<rect x="0" y="${H-30}" width="${W_}" height="18" fill="${INK}"/>`;
+  /* moquette accent — a row of lozenges on the foreground seat */
+  for (let lz = 0; lz < 18; lz++) {
+    const lx = 24 + lz * 28;
+    const ly = H - 21;
+    if (lx < W_ - 16) {
+      s += `<path d="M${lx},${ly-3} L${lx+3},${ly} L${lx},${ly+3} L${lx-3},${ly} Z" fill="${PAPER}"/>`;
+    }
+  }
+
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   svgShopfront — a parade of London shopfronts seen along a high street.
+   The street narrator's establishing shot. Three or four shops in row,
+   distinct facades, awnings, signage. The locksmith's brass-padlock window
+   appears centrally if the location is Bellenden Road / Peckham.
+   ───────────────────────────────────────────────────────────────────── */
+function svgShopfront(s0) {
+  seedRand(s0);
+  const W_ = 520, H = 220;
+  const c = nowConditions();
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+
+  /* sky */
+  if (c.is_dark) s += hatch(`<rect x="0" y="12" width="${W_}" height="40"/>`, 0, 12, W_, 40, 65, 2.5, 0.5);
+  else s += hatch(`<rect x="0" y="12" width="${W_}" height="30"/>`, 0, 12, W_, 30, 65, 8, 0.4);
+
+  /* Upper-storey rooftops above shops — domestic London above commercial */
+  const upperBase = 70;
+  const upperTop = 30;
+  s += `<rect x="0" y="${upperTop}" width="${W_}" height="${upperBase-upperTop}" fill="${INK}"/>`;
+  /* sash windows in the upper storey */
+  for (let i = 0; i < 6; i++) {
+    const wx = 30 + i * 80;
+    const wy = upperTop + 8;
+    s += `<rect x="${wx}" y="${wy}" width="14" height="22" fill="${PAPER}"/>`;
+    s += `<line x1="${wx+7}" y1="${wy}" x2="${wx+7}" y2="${wy+22}" stroke="${INK}" stroke-width="0.6"/>`;
+    s += `<line x1="${wx}" y1="${wy+11}" x2="${wx+14}" y2="${wy+11}" stroke="${INK}" stroke-width="0.6"/>`;
+  }
+
+  /* Sign band above the shopfronts */
+  const signTop = upperBase, signBot = upperBase + 22;
+  s += `<rect x="0" y="${signTop}" width="${W_}" height="${signBot-signTop}" fill="${PAPER}" stroke="${INK}" stroke-width="0.8"/>`;
+  /* divider lines for individual shops */
+  const shopDividers = [0, 130, 260, 390, W_];
+  for (const x of shopDividers) {
+    if (x === 0 || x === W_) continue;
+    s += `<line x1="${x}" y1="${signTop}" x2="${x}" y2="${H-12}" stroke="${INK}" stroke-width="1.2"/>`;
+  }
+
+  /* Shop signs — text in the sign band */
+  const shops = [
+    { x: 0,   w: 130, name: 'BARBER',     style: 'roman' },
+    { x: 130, w: 130, name: 'KEYS·LOCKS', style: 'caps'  },
+    { x: 260, w: 130, name: 'DELI',       style: 'italic' },
+    { x: 390, w: 130, name: 'NEWSAGENT',  style: 'roman' }
+  ];
+  shops.forEach(sh => {
+    const cx = sh.x + sh.w / 2;
+    const cy = (signTop + signBot) / 2 + 4;
+    let fontFamily = 'IM Fell English, serif', style = '';
+    if (sh.style === 'caps')   { fontFamily = 'IM Fell DW Pica SC, serif'; }
+    if (sh.style === 'italic') { style = ' font-style="italic"'; }
+    const size = sh.style === 'caps' ? 12 : 14;
+    s += `<text x="${cx}" y="${cy}" text-anchor="middle" font-family="${fontFamily}" font-size="${size}" fill="${INK}"${style}>${escapeXml(sh.name)}</text>`;
+  });
+
+  /* Shopfronts — each shop has: an awning, a display window, a door */
+  shops.forEach((sh, idx) => {
+    const x = sh.x + 4;
+    const w = sh.w - 8;
+    const winTop = signBot + 6;
+    const winBot = H - 28;
+
+    /* awning — striped, a rectangle with vertical stripes */
+    if (idx % 2 === 0) {
+      const aw = w - 8;
+      const ax = x + 4;
+      s += `<path d="M${ax},${signBot} L${ax+aw},${signBot} L${ax+aw-4},${signBot+10} L${ax+4},${signBot+10} Z" fill="${PAPER}" stroke="${INK}" stroke-width="0.8"/>`;
+      for (let st = 0; st < 6; st++) {
+        const sx = ax + (st/6)*aw + (sr()*1);
+        s += `<line x1="${sx}" y1="${signBot}" x2="${sx-2}" y2="${signBot+10}" stroke="${INK}" stroke-width="0.5" opacity="0.7"/>`;
+      }
+    }
+
+    /* window or display */
+    const winX = x + 8;
+    const winW = w - 16;
+    const winY = idx % 2 === 0 ? signBot + 14 : signBot + 6;
+    const winH = winBot - winY;
+    /* outer window frame (black bezel) */
+    s += `<rect x="${winX-3}" y="${winY-3}" width="${winW+6}" height="${winH+6}" fill="${INK}"/>`;
+    s += `<rect x="${winX}" y="${winY}" width="${winW}" height="${winH}" fill="${PAPER}"/>`;
+    /* window mullions — single horizontal */
+    s += `<rect x="${winX}" y="${winY + winH*0.6 - 1}" width="${winW}" height="2" fill="${INK}"/>`;
+
+    /* contents of each window — characteristic to shop type */
+    if (sh.name === 'KEYS·LOCKS') {
+      /* a row of brass padlocks hanging in the window — small cream rectangles
+         on dark hooks against a hatched display backing */
+      s += hatch(`<rect x="${winX}" y="${winY}" width="${winW}" height="${winH*0.55}"/>`,
+                 winX, winY, winW, winH*0.55, 65, 4, 0.4);
+      const padlocks = 5;
+      for (let p = 0; p < padlocks; p++) {
+        const px = winX + 8 + p * ((winW - 16) / padlocks);
+        const py = winY + 10;
+        /* hanging line */
+        s += `<line x1="${px+5}" y1="${winY}" x2="${px+5}" y2="${py}" stroke="${INK}" stroke-width="0.6"/>`;
+        /* shackle */
+        s += `<path d="M${px+1},${py+3} Q${px+1},${py-2} ${px+5},${py-2} Q${px+9},${py-2} ${px+9},${py+3}" fill="none" stroke="${INK}" stroke-width="1.2"/>`;
+        /* body */
+        s += `<rect x="${px}" y="${py+3}" width="11" height="9" fill="${INK}"/>`;
+        s += `<circle cx="${px+5.5}" cy="${py+8}" r="0.8" fill="${PAPER}"/>`;
+      }
+      /* a small "KEYS CUT" sign in the lower half */
+      s += `<rect x="${winX+winW/2-22}" y="${winY+winH*0.7}" width="44" height="14" fill="${PAPER}" stroke="${INK}" stroke-width="0.7"/>`;
+      s += `<text x="${winX+winW/2}" y="${winY+winH*0.8}" text-anchor="middle" font-family="IM Fell DW Pica SC, serif" font-size="6" fill="${INK}">KEYS CUT</text>`;
+    } else if (sh.name === 'BARBER') {
+      /* a mirror with a chair silhouette */
+      s += `<rect x="${winX+8}" y="${winY+8}" width="${winW-16}" height="${winH*0.5}" fill="${PAPER}" stroke="${INK}" stroke-width="0.7"/>`;
+      /* chair: hump shape */
+      const cy = winY + winH - 18;
+      s += `<path d="M${winX+winW/2-12},${cy} Q${winX+winW/2-12},${cy-12} ${winX+winW/2},${cy-14} Q${winX+winW/2+12},${cy-12} ${winX+winW/2+12},${cy} L${winX+winW/2+12},${cy+8} L${winX+winW/2-12},${cy+8} Z" fill="${INK}"/>`;
+      /* barber pole — small vertical to the right of the door */
+    } else if (sh.name === 'DELI') {
+      /* shelves with bottles — pairs of vertical rectangles */
+      for (let r = 0; r < 3; r++) {
+        const sy = winY + 8 + r * (winH/3 - 4);
+        s += `<line x1="${winX+4}" y1="${sy + 14}" x2="${winX+winW-4}" y2="${sy + 14}" stroke="${INK}" stroke-width="0.5"/>`;
+        for (let b = 0; b < 6; b++) {
+          const bx = winX + 6 + b * ((winW - 12) / 6);
+          const bh = 8 + Math.floor(sr() * 4);
+          s += `<rect x="${bx}" y="${sy+14-bh}" width="3" height="${bh}" fill="${INK}"/>`;
+        }
+      }
+    } else if (sh.name === 'NEWSAGENT') {
+      /* a rack of papers — vertical rectangles with title bands at top */
+      for (let p = 0; p < 5; p++) {
+        const px = winX + 6 + p * ((winW - 12) / 5);
+        const ph = winH - 16;
+        s += `<rect x="${px}" y="${winY+8}" width="${(winW-12)/5 - 2}" height="${ph}" fill="${PAPER}" stroke="${INK}" stroke-width="0.4"/>`;
+        s += `<rect x="${px}" y="${winY+8}" width="${(winW-12)/5 - 2}" height="6" fill="${INK}"/>`;
+        /* a few horizontal lines suggesting columns */
+        for (let l = 0; l < 4; l++) {
+          s += `<line x1="${px+2}" y1="${winY+18+l*5}" x2="${px+(winW-12)/5-4}" y2="${winY+18+l*5}" stroke="${INK}" stroke-width="0.3"/>`;
+        }
+      }
+    }
+  });
+
+  /* Pavement strip and road */
+  s += `<rect x="0" y="${H-28}" width="${W_}" height="14" fill="${PAPER}"/>`;
+  s += `<line x1="0" y1="${H-28}" x2="${W_}" y2="${H-28}" stroke="${INK}" stroke-width="1"/>`;
+  s += `<line x1="0" y1="${H-14}" x2="${W_}" y2="${H-14}" stroke="${INK}" stroke-width="1"/>`;
+  /* paving */
+  for (let i = 0; i < 18; i++) {
+    s += `<line x1="${i*W_/18 + 4}" y1="${H-28}" x2="${i*W_/18 + 4}" y2="${H-14}" stroke="${INK}" stroke-width="0.3"/>`;
+  }
+  /* road below */
+  s += `<rect x="0" y="${H-14}" width="${W_}" height="8" fill="${INK}"/>`;
+
+  /* Rain if relevant */
+  if (c.is_raining) {
+    for (let i = 0; i < 50; i++) {
+      const rx = sr() * W_, ry = sr() * (H-30);
+      s += `<line x1="${rx.toFixed(0)}" y1="${ry.toFixed(0)}" x2="${(rx+3).toFixed(0)}" y2="${(ry+10).toFixed(0)}" stroke="${INK}" stroke-width="0.4" opacity="0.5"/>`;
+    }
+  }
+
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ESCAPING
+   ═══════════════════════════════════════════════════════════════════════════ */
+function escapeXml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escapeHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RENDER
+   ═══════════════════════════════════════════════════════════════════════════ */
+function renderCaseHeader(c, num) {
+  const el = document.createElement('div');
+  el.className = 'case-header';
+  const summon = c.summon ? fillSlots(c.summon) : (c.blurb || '');
+  /* Speaker label — which instrument is telling this story.
+     A few stories are co-narrated; for now we show the primary speaker only. */
+  const speakerLabels = {
+    thames: 'told by the river',
+    pollen: 'told by the pollen',
+    bus:    'told by the 343',
+    street: 'told by the street',
+    wind:   'told by the wind',
+    lamps:  'told by the lamps',
+    grid:   'told by the grid',
+    air:    'told by the air',
+    bridge: 'told by the bridge'
+  };
+  const speakerLabel = c.told_by && speakerLabels[c.told_by] ? speakerLabels[c.told_by] : '';
+  el.innerHTML =
+    `<div class="case-no">A STORY OF NO. ${toRoman(num)}${speakerLabel ? ' &middot; ' + escapeHtml(speakerLabel) : ''}</div>` +
+    `<div class="case-summon">${escapeHtml(summon)}</div>` +
+    `<div class="case-title">${escapeHtml(c.title)}</div>`;
+  document.getElementById('strip').appendChild(el);
+}
+
+function closeCaseUI() {
+  const headers = document.querySelectorAll('.case-header');
+  if (headers.length) headers[headers.length-1].classList.add('closed');
+}
+
+function renderPanel(panel, n, total, isFirst) {
+  const s0 = (Date.now() ^ Math.floor(Math.random()*0xffffff)) | 0;
+  let svg;
+  switch (panel.scene) {
+    case 'interior':     svg = svgInterior(s0); break;
+    case 'notebook':
+      svg = svgNotebook(s0, panel.notes ? panel.notes.map(n => fillSlots(n)) : ['(no notes)']);
+      break;
+    case 'map':          svg = svgMap(s0, STORY.currentCase?.location || ''); break;
+    case 'street':       svg = svgStreet(s0); break;
+    case 'tree':         svg = svgTree(s0, panel.species || 'birch'); break;
+    case 'bus_interior': svg = svgBusInterior(s0); break;
+    case 'shopfront':    svg = svgShopfront(s0); break;
+    case 'cityscape':
+    default:             svg = svgCityscape(s0);
+  }
+  const filled = fillSlots(panel.prose);
+  const el = document.createElement('article');
+  el.className = 'panel' + (isFirst ? ' first' : '');
+  el.innerHTML =
+    `<div class="panel-meta"><span>PANEL ${n} OF ${total}</span><span class="phase">${escapeHtml(panel.phase || '')}</span></div>` +
+    `<div class="panel-frame">${svg}</div>` +
+    (panel.caption ? `<div class="panel-meta" style="margin-top:6px;justify-content:center"><span>${escapeHtml(fillSlots(panel.caption).toUpperCase())}</span></div>` : '') +
+    `<div class="panel-prose">${filled}</div>`;
+  document.getElementById('strip').appendChild(el);
+  const loading = document.getElementById('loading');
+  if (loading) loading.style.display = 'none';
+}
+
+function updateOpening() {
+  const speakers = composeOpening();
+  /* Refresh the four opening lines. Re-trigger the staggered animation
+     by removing and re-adding the opening-line class. */
+  const ids = ['ol-river', 'ol-air', 'ol-wind', 'ol-bus'];
+  ids.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const speaker = speakers[i];
+    if (!speaker) {
+      el.style.display = 'none';
+      el.innerHTML = '';
+      return;
+    }
+    el.style.display = 'block';
+    el.innerHTML = `<span class="src">${speaker.label.toUpperCase()}</span>${escapeHtml(speaker.text)}`;
+    /* re-trigger animation */
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = '';
+  });
+}
+
+/* Backwards-compat alias for code paths that still call updateDateline */
+const updateDateline = updateOpening;
+
+function toRoman(n) {
+  const map = [['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]];
+  let out=''; for (const [s,v] of map) while(n>=v) { out+=s; n-=v; } return out;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAIN LOOP
+   ═══════════════════════════════════════════════════════════════════════════ */
+function startNewCase() {
+  STORY.caseNum++;
+  STORY.currentCase = pickCase();
+  STORY.panelInCase = 0;
+  rememberCase(STORY.currentCase.id);
+  renderCaseHeader(STORY.currentCase, STORY.caseNum);
+}
+
+function nextPanel() {
+  if (!STORY.currentCase) startNewCase();
+  const c = STORY.currentCase;
+  const n = STORY.panelInCase + 1;
+  const total = c.panels.length;
+  const panel = c.panels[STORY.panelInCase];
+  renderPanel(panel, n, total, n === 1);
+  STORY.panelInCase++;
+  if (STORY.panelInCase >= total) {
+    closeCaseUI();
+    STORY.currentCase = null;
+  }
+}
+
+let cdSecs = PANEL_INTERVAL_MS / 1000, cdTimer = null;
+function startCountdown() {
+  cdSecs = PANEL_INTERVAL_MS / 1000;
+  if (cdTimer) clearInterval(cdTimer);
+  cdTimer = setInterval(() => {
+    cdSecs--;
+    const m = Math.floor(cdSecs/60), s = cdSecs%60;
+    document.getElementById('countdown').textContent = m>0 ? `${m}m ${pad(s)}s` : `${s}s`;
+    if (cdSecs <= 0) cycle();
+  }, 1000);
+}
+async function cycle() {
+  await refreshAll();
+  nextPanel();
+  startCountdown();
+}
+
+let lastScrollLoad = 0;
+window.addEventListener('scroll', () => {
+  const now = Date.now();
+  if (now - lastScrollLoad < 5000) return;
+  if (window.innerHeight + window.scrollY > document.body.offsetHeight - 200) {
+    lastScrollLoad = now;
+    cycle();
+  }
+});
+
+/* boot */
+(async () => {
+  await refreshAll();
+  nextPanel();
+  startCountdown();
+})();
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE CASE BANK
+   ═══════════════════════════════════════════════════════════════════════════ */
+const CASES = [
+
+  /* ─────────────────────────────────────────────────────────────────────
+     CASE 1 — A STORY THE RIVER TELLS
+     The Thames remembers a body. Hart is the detective the river's stories
+     sometimes need. He is a guest character; the river is the protagonist.
+     ───────────────────────────────────────────────────────────────────── */
+  {
+    id: 'tower_bridge_figure',
+    title: 'The Body Beneath Tower Bridge',
+    told_by: 'thames',
+    summon: 'Tonight the river is restless. It remembers a body it once carried.',
+    location: 'Tower Bridge',
+    requires: { is_dark: true },
+    prefers: { is_raining: true, is_cool: true, is_high_tide: true },
+    panels: [
+      {
+        phase: 'the river remembers', scene: 'cityscape',
+        caption: 'A figure on the upstream walkway',
+        prose: "I had carried bodies before, and I would again. The one I am thinking of tonight came to me on a night much like this. {{time_phrase}}, when a figure was seen on my upstream side, leaning over my rail; some minutes later the figure was gone. I was {{tide_phrase}}, which meant that whatever had entered me would not come up again for some hours."
+      },
+      {
+        phase: 'and a man came down', scene: 'street',
+        caption: 'Approach from the south',
+        prose: "A man called Hart came down on foot from Tooley Street. The pavement under his shoes was {{wet_phrase}}, {{lamp_phrase}}. Two PCs had taped off my upstream walkway; a third was keeping a small cluster of late drinkers at a polite distance. {{wind_phrase}} Hart did not look over the rail. There was no point yet. I knew it; he knew it."
+      },
+      {
+        phase: 'in the keeper\u2019s room', scene: 'interior',
+        caption: 'The bridge keeper\'s room',
+        prose: "The keeper had let them sit in his small room above my south pier. Tea was made; a kettle was always made. He was a thin man called Walters, sixty if he was a day, who had seen most of what I chose to show.<span class=\"dialogue\">She was up there about {{incident_time_phrase}}. I noted it because I note them all. Not many, this time of year, this kind of weather.</span>"
+      },
+      {
+        phase: 'what Hart wrote', scene: 'notebook',
+        caption: 'Working notes',
+        notes: [
+          'CASE: Figure, Tower Bridge upstream',
+          'TIME: spotted {{incident_time_short}}, gone by {{incident_plus_ten_short}}',
+          '1. F, late 20s, dark coat',
+          '2. {{rain_phrase_short}}',
+          '[strike]3. CCTV — none facing upstream walkway',
+          '[under]4. Walters: saw NO ONE ELSE on the bridge',
+          '5. Tide {{tide_height_m}}m, {{tide_state_short}}'
+        ],
+        prose: "Hart wrote these out by hand at the keeper's desk. Walters watched him do it and offered no commentary. There was something in the line about no one else on the bridge that Hart underlined twice and then sat with for some minutes. I watched him through the keeper's window. I had nothing yet to give him."
+      },
+      {
+        phase: 'the 343 going north', scene: 'cityscape',
+        caption: 'Northbound on the 343',
+        prose: "{{bus_time_phrase}}. Hart took it as far as Aldgate and walked back. The upper deck was almost empty at that hour. He sat at the front and watched the rain make its diagonal lines against the glass. He was thinking, I knew, about whether she had been pushed and whether she had gone in. The second was the easier question. The first would wait for me, and a body, and the various things I had not yet decided to give back."
+      },
+      {
+        phase: 'at Wapping Stairs', scene: 'street',
+        caption: 'At Wapping Stairs',
+        prose: "At Wapping the river police had a launch out, working slow and methodical against my current. I would turn at {{turn_time_phrase}}; whatever was in me now would be moving {{post_turn_direction}} after that. Hart watched from the steps a long while. {{cold_phrase}}"
+      },
+      {
+        phase: 'what Hart could not have seen', scene: 'notebook',
+        caption: 'The reframe',
+        notes: [
+          'Walters saw ONE figure',
+          'Walters saw NO struggle',
+          'Walters saw NO second figure',
+          'BUT —',
+          'Keeper\'s room window faces SOUTH',
+          'North walkway not visible from his desk',
+          '[under]Reframe: he saw what was visible to him',
+          'The case is not what he saw. It is what he could not have seen.'
+        ],
+        prose: "Hart wrote the second page of notes back at the station. The pencil broke twice. He sharpened it both times with the small knife he kept in the desk drawer for that purpose, and went on writing. I cannot tell you what is on the upstream walkway when no one is looking. That is the keeper's job, and he had done part of it."
+      },
+      {
+        phase: 'and the river gave her back', scene: 'interior',
+        caption: 'The keeper\'s room, a second time',
+        prose: "By the time the launch found her, the rain had eased and the sky over the City was the colour of weak tea. Hart took the call standing in the bridge keeper's room, looking at the door behind which Walters was making yet another kettle. There had been a second figure. Walters had seen it, in the corner of the south-facing window, and chosen — for reasons that would emerge slowly over the next several days — not to mention it. Hart thanked him for the tea, and went down to meet the launch. I had given her back. That is what I do."
+      }
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────────────
+     CASE 2 — A STORY A SOUTH LONDON STREET TELLS
+     Bellenden Road on a quiet afternoon. The street notices an absence.
+     Hart appears as a guest. The street narrates.
+     ───────────────────────────────────────────────────────────────────── */
+  {
+    id: 'peckham_locksmith',
+    title: 'The Locksmith of Bellenden Road',
+    told_by: 'street',
+    summon: 'A street in Peckham has been quiet too long. Something is missing in it.',
+    location: 'Peckham Rye',
+    requires: { is_dark: false, is_afternoon: true },
+    prefers: { is_mild: true, is_clear: true },
+    panels: [
+      {
+        phase: 'the street notices', scene: 'shopfront',
+        caption: 'Bellenden Road, {{weekday}}',
+        prose: "{{time_phrase}}. I am Bellenden Road, between the Rye and Choumert. I know my regular shapes. The locksmith, well known on me for thirty years, had not opened the shop after lunch. {{rain_phrase_lead}} His apprentice had let himself in by the side door and found the front shop locked, the chain across, the takings still in the drawer. The locksmith was nowhere about. I noticed."
+      },
+      {
+        phase: 'a man comes up from the Rye', scene: 'shopfront',
+        caption: 'The shop on Bellenden Road',
+        prose: "A man called Hart came up from Peckham Rye on foot. {{cold_phrase}} The shop sits between a barber and a Portuguese deli; its window holds a row of brass padlocks that have been there as long as I have been a road. The apprentice — a serious young man called Idris — was waiting at the side door with his hands clasped in front of him. <span class=\"dialogue\">I haven't moved anything. I called as soon as I knew it was wrong.</span>"
+      },
+      {
+        phase: 'inside the shop', scene: 'interior',
+        caption: 'The shop, locked from within',
+        prose: "I cannot see inside my own shops, only their windows. So I will tell you what Hart found, as Idris later told me: the front door was indeed chained — not bolted, only chained — and Hart noted this in passing. The cash drawer was unopened. A cup of tea on the workbench was cold but not stale; a piece of toast next to it had a single bite taken out of it. Hart looked at the toast for some time."
+      },
+      {
+        phase: 'what Hart wrote', scene: 'notebook',
+        caption: 'Working notes',
+        notes: [
+          'CASE: Locksmith, Bellenden Rd, missing',
+          'Time noted: shop unopened by {{hour_short}}',
+          '1. Front door CHAINED, not bolted',
+          '2. Cash drawer untouched',
+          '3. Tea cold, toast half-bitten',
+          '[strike]4. Side door open — apprentice key',
+          '[under]5. Workbench: a key clamp, fresh brass shavings',
+          '6. The chain. Why the chain?'
+        ],
+        prose: "Hart wrote at the workbench, on a page torn from his pocketbook. Idris stood in the doorway and did not interrupt. The shop bell, which was the old kind on a curved spring, gave a single small note when a draught came through from somewhere — from me, in fact, when a 343 went past the door."
+      },
+      {
+        phase: 'Hart goes north for a while', scene: 'cityscape',
+        caption: 'Northbound, mid-afternoon',
+        prose: "Hart took the 343 back along my length, more out of habit than purpose, then on northwards. {{bus_time_phrase}}. He sat downstairs and watched the schoolchildren get on at Camberwell, all elbows and bags, and he thought about the chain. A chained door, from the inside, by a man who then was not there. {{wind_short}} through the open window of the bus."
+      },
+      {
+        phase: 'a second look', scene: 'notebook',
+        caption: 'A second look at the bench',
+        notes: [
+          'Brass shavings on the workbench',
+          'A KEY had been freshly cut',
+          'For whose lock?',
+          '[under]A locksmith makes a key for himself',
+          'The chain is for someone he is hiding from',
+          'Not vanished. HIDING.',
+          'Where would a locksmith hide?'
+        ],
+        prose: "Hart had the apprentice walk him back to the shop. He did not need to look at the workbench again; he needed to look at the cellar door, which was set into the back wall and which he had taken the first time for a cupboard. The lock on it was new. The key was on the workbench, finished but not yet hung. Idris had not noticed. There was no reason he would have."
+      },
+      {
+        phase: 'the cellar', scene: 'interior',
+        caption: 'The cellar door',
+        prose: "The locksmith was in the cellar. He was alive, and unhurt, and not at all pleased to be found, since being found was the precise outcome he had been at some pains that morning to prevent. Hart did not press him on the reasons in the moment; the reasons would come, and the relevant unit would attend to them. He left Idris to lock up, and walked back down to me, in the long mild light of the afternoon. {{light_phrase}} A 343 went past him, southbound, almost empty. I am Bellenden Road, and the locksmith is back. That is all I needed."
+      }
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────────────
+     CASE 3 — A STORY THE POLLEN TELLS
+     The birch pollen has a story about itself, and about a man on the
+     upper deck of the 343 who has been miserable for three weeks.
+     No detective. The pollen narrates.
+     ───────────────────────────────────────────────────────────────────── */
+  {
+    id: 'pollen_birch_year',
+    title: 'A Year for Birches',
+    told_by: 'pollen',
+    summon: 'The birches are heavier than they have been in ten years. The pollen has a story to tell.',
+    location: 'Peckham Rye',
+    requires: { is_raining: false, pollen_active: true },
+    prefers: { is_mild: true, is_clear: true, is_morning: true, pollen_heavy: true },
+    panels: [
+      {
+        phase: 'the birches', scene: 'tree', species: 'birch',
+        caption: 'Choumert Road, mid-morning',
+        prose: "I am birch pollen. There are years when I am modest and years when I am at it, and this is a year when I am at it. The big birch on Choumert Road, the one with the white trunk that splits at fifteen feet — she has been releasing me since the third of April and shows no sign of stopping. I have been on the air across the south of the river for three weeks. The morning is dry, which is good for me; I do not like the rain. It puts me on the ground."
+      },
+      {
+        phase: 'the upper deck', scene: 'cityscape',
+        caption: 'The 343, northbound',
+        prose: "{{bus_time_phrase}}. There is a man on the upper deck of every northbound 343 between half past seven and a quarter to nine, weekdays. He is in his thirties, he wears glasses, and for three weeks now he has been miserable. He is miserable because of me. He does not know which tree is doing it. He suspects, correctly, that it is something on his walk between his flat and the bus stop."
+      },
+      {
+        phase: 'what the pollen carries', scene: 'tree', species: 'birch',
+        caption: 'Bellenden Road, the same morning',
+        prose: "I am carried on the wind, or in the absence of wind I drift. {{wind_phrase}} I have a half-life on the air of about six hours in dry conditions. I will be on him as he sits on the bus, on his coat sleeve, in his hair, in the corner of his eye. He will arrive at his desk in Borough and his colleagues will know, without him telling them, what kind of week he is having. The grass pollen is mostly not yet up; that is a kindness, since I am bad enough on my own."
+      },
+      {
+        phase: 'wondering', scene: 'map',
+        caption: 'A map of the line, in pollen',
+        prose: "If you mapped me along the 343 this morning you would find me thickest at Peckham Rye and Choumert, easing through Camberwell, almost absent at the Elephant where the road is wide and the air moves more freely, and rising again at London Bridge where the plane trees are doing their own different kind of work. I am a south London problem. The man on the upper deck does not know this; he thinks the whole of London is at him. Only my half is."
+      },
+      {
+        phase: 'letting it go', scene: 'cityscape',
+        caption: 'The bus crosses the bridge',
+        prose: "He will get off at Aldgate, and on his way home this evening I will be on him again, less so, because the wind will have shifted. {{wind_short}}. By June I will be done; the alders are already done; the grass will take over from me, and the man on the upper deck will have a different and worse three weeks. None of this is a story with a resolution. It is a story about what is on the air on a particular {{weekday_lower}}. I am the air's story this morning. I will not always be."
+      }
+    ]
+  },
+
+  /* ─────────────────────────────────────────────────────────────────────
+     CASE 4 — A STORY THE 343 TELLS
+     The bus narrates. A regular passenger; one morning they don't get on.
+     The bus only knows who it carries. The story does not resolve, because
+     the bus does not have the means to resolve it.
+     ───────────────────────────────────────────────────────────────────── */
+  {
+    id: 'bus_regular_passenger',
+    title: 'The Tuesday Passenger',
+    told_by: 'bus',
+    summon: 'The 343 has a story about who it carries, and who it once carried and now does not.',
+    location: 'New Cross Gate',
+    requires: { is_morning: true },
+    prefers: { is_clear: true, is_mild: true },
+    panels: [
+      {
+        phase: 'I carry people', scene: 'bus_interior',
+        caption: 'Northbound, early',
+        prose: "I am the 343. I run from New Cross Gate to Aldgate and back, a thirty-eight-stop circuit, six days a week and most of the seventh. I carry people. {{bus_time_phrase}}. I do not know who they are, mostly. I know who gets on at the same stop at the same time enough mornings in a row that they become a fact about me. I have a few of those. One of them was a woman in her fifties, who got on at New Cross Gate every weekday morning at twenty past seven, and got off at London Bridge."
+      },
+      {
+        phase: 'eleven years', scene: 'street',
+        caption: 'New Cross Gate, the stop',
+        prose: "She had been doing it for eleven years. I noticed her in the way I notice things — not by name, not by face, but by shape and timing. A medium woman in a brown coat in winter and a thinner brown coat in spring, who tapped on at twenty past seven on weekdays, who sat downstairs by the window on the offside, who got off at London Bridge. {{rain_phrase_short_capitalised}}, this kind of morning was her kind of morning."
+      },
+      {
+        phase: 'the morning she did not get on', scene: 'cityscape',
+        caption: 'A Tuesday in the second week of October',
+        prose: "On a Tuesday in the second week of October, three years ago, she did not get on. I waited at the stop the standard fifteen seconds and pulled away. There was no one else waiting. The next morning she did not get on either, and the morning after that, and after that. I did not have the means to make anything of this. I run my route. I keep my times. I noticed only because she had become a fact about me, and now the fact had stopped."
+      },
+      {
+        phase: 'what I did not know', scene: 'map',
+        caption: 'A map of the line',
+        prose: "I do not know what happened to her. I know only the things a bus knows. I know she did not get on at her stop on subsequent mornings; I know she did not get on at any other stop on my route, because she was not on the offside downstairs at that hour for the next several months. I cannot put together the rest of what is true about her. The drivers have changed since then; the regulars have changed; this is not a story I have anyone to tell, except now, this morning, to whoever is reading. {{wind_short}}."
+      },
+      {
+        phase: 'and yet I went on', scene: 'bus_interior',
+        caption: 'The same stop, this morning',
+        prose: "Someone else gets on at twenty past seven now. He is in his forties, he is reading something on his phone, he gets off at the Elephant. He is a fact about me too, and one day he will stop being one, and I will notice that, and I will go on. That is what I do. I am the 343. I went on. I always go on."
+      }
+    ]
+  }
+
+];
+
+</script>
+</body>
+</html>
