@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The City Speaks — A page of attention to London's natural instruments</title>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=IM+Fell+English:ital,wght@0,400;1,400&family=IM+Fell+DW+Pica+SC&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #ede4cf;
+    --paper-2: #e3d8bd;
+    --ink: #1a140c;
+    --ink-soft: #2c2418;
+    --ochre: #8a4818;
+    --crimson: #5a1a1a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #1a140c; }
+  body {
+    font-family: 'IM Fell English', Georgia, serif;
+    color: var(--ink);
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 12% 8%, rgba(120,80,30,0.10), transparent 35%),
+      radial-gradient(ellipse at 88% 14%, rgba(90,60,20,0.08), transparent 40%),
+      radial-gradient(ellipse at 30% 92%, rgba(110,70,25,0.10), transparent 38%),
+      radial-gradient(ellipse at 78% 78%, rgba(80,50,15,0.07), transparent 42%),
+      var(--paper);
+    background-attachment: fixed;
+  }
+  #sheet { max-width: 600px; margin: 0 auto; padding: 0 16px 80px; }
+
+  /* ───── MASTHEAD ───── */
+  #masthead {
+    padding: 26px 4px 14px;
+    border-bottom: 3px double var(--ink);
+    text-align: center;
+  }
+  #masthead h1 {
+    font-family: 'UnifrakturCook', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  #masthead .sub {
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  #masthead .invocation {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    padding: 0 12px;
+    line-height: 1.4;
+  }
+
+  /* ───── PANELS ───── */
+  .panel {
+    margin: 28px 0;
+    border-top: 1px solid var(--ink);
+    padding-top: 16px;
+  }
+  .panel:first-of-type { border-top: none; padding-top: 8px; }
+
+  .panel-header {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .panel-header .speaker-label {
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .panel-header .speaker-name {
+    font-family: 'UnifrakturCook', serif;
+    font-size: 1.6rem;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .panel-illus {
+    margin: 14px 0 12px;
+    padding: 4px;
+    background: var(--paper-2);
+    border: 1px solid var(--ink);
+  }
+  .panel-illus svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--paper-2);
+  }
+
+  .panel-voice {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.45;
+    text-align: center;
+    margin: 12px 8px 8px;
+    color: var(--ink);
+  }
+  .panel-voice.mute { opacity: 0.45; }
+
+  .panel-reading {
+    text-align: center;
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    padding: 6px 8px;
+    border-top: 1px solid rgba(26,20,12,0.3);
+    border-bottom: 1px solid rgba(26,20,12,0.3);
+  }
+
+  /* ───── POEM ───── */
+  .panel-poem {
+    margin-top: 12px;
+    padding: 0 8px;
+  }
+  .poem-toggle {
+    text-align: center;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    color: var(--ochre);
+    font-size: 0.92rem;
+    cursor: pointer;
+    padding: 8px 4px;
+    user-select: none;
+    transition: opacity 0.3s ease;
+  }
+  .poem-toggle:hover { opacity: 0.7; }
+  .poem-toggle::before { content: '\201C\2002'; }
+  .poem-toggle::after  { content: '\2002\201D'; }
+
+  .poem-content {
+    display: none;
+    margin: 12px 4px 8px;
+    padding: 14px 12px 16px;
+    background: rgba(237,228,207,0.5);
+    border-left: 2px solid var(--ochre);
+  }
+  .poem-content.open { display: block; animation: unfold 0.6s ease-out; }
+  @keyframes unfold {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .poem-content .poem-title {
+    font-family: 'UnifrakturCook', serif;
+    font-size: 1.1rem;
+    text-align: center;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .poem-content .poem-attribution {
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-align: center;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .poem-content .poem-body {
+    font-family: 'IM Fell English', serif;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--ink);
+    text-align: left;
+    padding-left: 8px;
+  }
+  /* Each line of verse on its own line */
+  .poem-content .poem-body p {
+    margin-bottom: 8px;
+  }
+  .poem-content .poem-body .stanza {
+    margin-bottom: 14px;
+  }
+
+  /* ───── FOOTER ───── */
+  #footer {
+    margin-top: 40px;
+    padding: 20px 8px;
+    border-top: 3px double var(--ink);
+    text-align: center;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  #footer .small {
+    display: block;
+    font-family: 'IM Fell DW Pica SC', serif;
+    font-style: normal;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    margin-top: 10px;
+  }
+
+  /* paper grain */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(60,40,15,0.025) 0px, rgba(60,40,15,0.025) 1px, transparent 1px, transparent 3px),
+      repeating-linear-gradient(90deg, rgba(60,40,15,0.018) 0px, rgba(60,40,15,0.018) 1px, transparent 1px, transparent 4px);
+    z-index: 200;
+    mix-blend-mode: multiply;
+  }
+
+  #loading {
+    text-align: center;
+    margin: 40px 8px;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<div id="sheet">
+
+  <header id="masthead">
+    <h1>The City Speaks</h1>
+    <div class="sub">A page of attention &middot; London &middot; <span id="masthead-date">&mdash;</span></div>
+    <div class="invocation" id="invocation">&mdash;</div>
+  </header>
+
+  <main id="panels">
+    <div id="loading">— the instruments are being read —</div>
+  </main>
+
+  <footer id="footer">
+    Live readings from open-meteo (weather &amp; pollen), the Environment Agency (Thames tide), and the Earth's slow turning.
+    <span class="small">Poems in the public domain. Reload to refresh.</span>
+  </footer>
+</div>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE CITY SPEAKS
+   A quiet page. Six speakers — river, wind, air, lamps, pollen, almanac —
+   each with a live reading, a voice in plain English, and a poem in the
+   public domain that fits the moment. No story. No detective. A page of
+   attention.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const RLAT = 51.4997, RLON = -0.0985;
+
+const W = { weather: null, air: null, tide: null, sun: null };
+
+/* ─────────────────────────────────────────────────────────────────────
+   DATA FETCHERS — all silent on failure
+   ───────────────────────────────────────────────────────────────────── */
+async function fetchWeather() {
+  try {
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${RLAT}&longitude=${RLON}&current=temperature_2m,rain,weather_code,wind_speed_10m,wind_direction_10m,cloud_cover&daily=sunrise,sunset&timezone=Europe/London`);
+    const j = await r.json();
+    W.weather = j.current;
+    if (j.daily?.sunrise?.[0]) W.sun = { sunrise: j.daily.sunrise[0], sunset: j.daily.sunset[0] };
+  } catch(e) {}
+}
+async function fetchAir() {
+  try {
+    const r = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${RLAT}&longitude=${RLON}&current=pm10,nitrogen_dioxide,birch_pollen,grass_pollen,alder_pollen,mugwort_pollen,ragweed_pollen,olive_pollen&timezone=Europe/London`);
+    W.air = (await r.json()).current;
+  } catch(e) {}
+}
+async function fetchTide() {
+  try {
+    const r = await fetch('https://environment.data.gov.uk/flood-monitoring/id/stations/E70839/readings?latest');
+    W.tide = (await r.json()).items?.[0];
+  } catch(e) {}
+}
+async function refreshAll() {
+  await Promise.allSettled([fetchWeather(), fetchAir(), fetchTide()]);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONDITIONS — derived booleans the speakers branch on
+   ═══════════════════════════════════════════════════════════════════════════ */
+function nowConditions() {
+  const now = new Date();
+  const h = now.getHours();
+  const month = now.getMonth();
+
+  let isDark = h < 6 || h >= 20;
+  if (W.sun) {
+    const t = now.getTime();
+    const sr = new Date(W.sun.sunrise).getTime();
+    const ss = new Date(W.sun.sunset).getTime();
+    isDark = t < sr || t > ss;
+  }
+
+  const temp = W.weather?.temperature_2m ?? 12;
+  const rain = W.weather?.rain ?? 0;
+  const cloud = W.weather?.cloud_cover ?? 50;
+  const wind = W.weather?.wind_speed_10m ?? 8;
+  const tide = W.tide ? parseFloat(W.tide.value) : NaN;
+
+  return {
+    hour: h, month,
+    is_dark: isDark,
+    is_dawn: !isDark && h < 9,
+    is_late_night: h >= 23 || h < 4,
+    temp_c: temp,
+    is_cold: temp < 8,
+    rain_mm: rain,
+    is_raining: rain > 0.2,
+    is_heavy_rain: rain > 1.5,
+    cloud, is_overcast: cloud > 70, is_clear: cloud < 30,
+    wind_kph: wind, is_windy: wind > 22, is_calm: wind < 5,
+    tide_m: isNaN(tide) ? null : tide,
+    is_high_tide: !isNaN(tide) && tide > 4.0,
+    is_low_tide:  !isNaN(tide) && tide < 1.5,
+    is_spring:  month >= 2 && month <= 4,
+    is_summer:  month >= 5 && month <= 7,
+    is_autumn:  month >= 8 && month <= 10,
+    is_winter:  month === 11 || month <= 1,
+    no2: W.air?.nitrogen_dioxide ?? null,
+    pollen_total: W.air ? (
+      (W.air.birch_pollen||0) + (W.air.alder_pollen||0) + (W.air.grass_pollen||0) +
+      (W.air.mugwort_pollen||0) + (W.air.ragweed_pollen||0) + (W.air.olive_pollen||0)
+    ) : 0
+  };
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SHARED ENGRAVING HELPERS
+   ═══════════════════════════════════════════════════════════════════════════ */
+const INK = '#1a140c', PAPER = '#e3d8bd';
+let _seedCounter = 0;
+let _s = 1;
+function sr() { _s = ((_s * 1664525 + 1013904223) & 0xffffffff) >>> 0; return _s / 4294967295; }
+function seedRand(v) { _s = (v|0) || 1; }
+let _cid = 0;
+function uid(p) { _cid++; return p + '_' + _cid; }
+
+function frame(w, h) {
+  const m = 6;
+  let s = `<rect x="${m}" y="${m}" width="${w-m*2}" height="${h-m*2}" fill="none" stroke="${INK}" stroke-width="2"/>`;
+  s += `<rect x="${m+5}" y="${m+5}" width="${w-m*2-10}" height="${h-m*2-10}" fill="none" stroke="${INK}" stroke-width="0.6"/>`;
+  const dia = (cx,cy) => `<path d="M${cx},${cy-3} L${cx+3},${cy} L${cx},${cy+3} L${cx-3},${cy} Z" fill="${INK}"/>`;
+  s += dia(m+5,m+5) + dia(w-m-5,m+5) + dia(m+5,h-m-5) + dia(w-m-5,h-m-5);
+  return s;
+}
+
+function hatch(clipShape, x, y, w, h, angle, spacing, sw) {
+  const id = uid('h');
+  const rad = angle * Math.PI / 180, cos = Math.cos(rad), sin = Math.sin(rad);
+  const diag = Math.ceil(Math.sqrt(w*w + h*h)) + 20;
+  const ox = x + w/2, oy = y + h/2;
+  let lines = '';
+  for (let d = -diag; d <= diag; d += spacing) {
+    const px = ox + cos*d, py = oy + sin*d;
+    lines += `<line x1="${(px-sin*diag).toFixed(1)}" y1="${(py+cos*diag).toFixed(1)}" x2="${(px+sin*diag).toFixed(1)}" y2="${(py-cos*diag).toFixed(1)}" stroke="${INK}" stroke-width="${sw}"/>`;
+  }
+  return `<defs><clipPath id="${id}">${clipShape}</clipPath></defs><g clip-path="url(#${id})">${lines}</g>`;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ILLUSTRATIONS — one per speaker, drawn once per page render
+   Each is roughly 520x180 viewBox.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* THE THAMES — a hatched ribbon between two banks. Tide level visible. */
+function illusThames() {
+  seedRand(101);
+  const W_ = 520, H = 180;
+  const c = nowConditions();
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+
+  /* Sky — sparse hatching at top */
+  if (c.is_dark) {
+    s += hatch(`<rect x="0" y="10" width="${W_}" height="40"/>`, 0, 10, W_, 40, 65, 3, 0.5);
+    /* a thin moon */
+    s += `<circle cx="430" cy="30" r="8" fill="${PAPER}" stroke="${INK}" stroke-width="0.6"/>`;
+  } else {
+    s += hatch(`<rect x="0" y="10" width="${W_}" height="22"/>`, 0, 10, W_, 22, 65, 7, 0.4);
+  }
+
+  /* Two banks — south on the left, north on the right.
+     Tide level affects how high the water sits between the banks. */
+  const bankTop = 80;     /* where banks rise from */
+  const bankHeight = 30;  /* how tall the banks are */
+  const groundY = H - 12;
+
+  /* tide ratio: 0..1, 0=low (water near groundY), 1=high (water near bankTop) */
+  let tideR = 0.5;
+  if (c.tide_m != null) tideR = Math.max(0.05, Math.min(0.95, c.tide_m / 6));
+  const waterY = groundY - tideR * (groundY - bankTop);
+
+  /* Far left bank silhouette — a simple wall with a small building */
+  s += `<rect x="0" y="${bankTop}" width="80" height="${groundY - bankTop}" fill="${INK}"/>`;
+  s += `<rect x="14" y="${bankTop - 24}" width="20" height="24" fill="${INK}"/>`;  /* a small warehouse */
+  s += `<rect x="44" y="${bankTop - 16}" width="16" height="16" fill="${INK}"/>`;  /* another */
+  s += `<line x1="0" y1="${bankTop}" x2="80" y2="${bankTop}" stroke="${PAPER}" stroke-width="0.8"/>`;
+  /* a few cream-cut windows in the warehouse */
+  for (let i = 0; i < 3; i++) {
+    s += `<rect x="${17 + i*5}" y="${bankTop - 18}" width="2" height="3" fill="${PAPER}"/>`;
+  }
+
+  /* Far right bank — mirrored */
+  s += `<rect x="440" y="${bankTop}" width="80" height="${groundY - bankTop}" fill="${INK}"/>`;
+  s += `<rect x="450" y="${bankTop - 30}" width="22" height="30" fill="${INK}"/>`;
+  s += `<rect x="478" y="${bankTop - 20}" width="18" height="20" fill="${INK}"/>`;
+  s += `<line x1="440" y1="${bankTop}" x2="520" y2="${bankTop}" stroke="${PAPER}" stroke-width="0.8"/>`;
+  for (let i = 0; i < 3; i++) {
+    s += `<rect x="${454 + i*6}" y="${bankTop - 24}" width="2" height="3" fill="${PAPER}"/>`;
+  }
+
+  /* If low tide, foreshore visible: a band of paper between water and banks */
+  if (c.tide_m != null && c.tide_m < 2) {
+    const foreH = groundY - waterY;
+    /* stones / shingle on left foreshore */
+    for (let i = 0; i < 12; i++) {
+      const sx = 80 + sr() * 60;
+      const sy = waterY + sr() * foreH;
+      s += `<ellipse cx="${sx.toFixed(0)}" cy="${sy.toFixed(0)}" rx="${(2 + sr()*2).toFixed(1)}" ry="${(0.8 + sr()*0.5).toFixed(1)}" fill="${INK}"/>`;
+    }
+    /* and right foreshore */
+    for (let i = 0; i < 12; i++) {
+      const sx = 380 + sr() * 60;
+      const sy = waterY + sr() * foreH;
+      s += `<ellipse cx="${sx.toFixed(0)}" cy="${sy.toFixed(0)}" rx="${(2 + sr()*2).toFixed(1)}" ry="${(0.8 + sr()*0.5).toFixed(1)}" fill="${INK}"/>`;
+    }
+  }
+
+  /* The water — a wide ribbon between the banks, hatched horizontally */
+  /* surface line first */
+  s += `<path d="M80,${waterY} Q150,${waterY - 1} 220,${waterY} T360,${waterY} T440,${waterY}" fill="none" stroke="${INK}" stroke-width="1.2"/>`;
+  /* horizontal hatching, broken */
+  for (let y = waterY + 4; y < groundY - 2; y += 4) {
+    let x = 82;
+    while (x < 438) {
+      const len = 8 + sr() * 24;
+      const gap = 3 + sr() * 8;
+      s += `<line x1="${x.toFixed(0)}" y1="${y.toFixed(1)}" x2="${(x+len).toFixed(0)}" y2="${y.toFixed(1)}" stroke="${INK}" stroke-width="0.5"/>`;
+      x += len + gap;
+    }
+  }
+  /* a small wave-curl or two */
+  for (let i = 0; i < 3; i++) {
+    const cx = 130 + i * 100;
+    const cy = waterY + 8 + sr() * 10;
+    s += `<path d="M${cx},${cy} q4,-3 8,0 q4,3 8,0" fill="none" stroke="${INK}" stroke-width="0.6"/>`;
+  }
+
+  /* Rain if raining */
+  if (c.is_raining) {
+    for (let i = 0; i < 40; i++) {
+      const rx = sr() * W_, ry = sr() * (H - 30);
+      s += `<line x1="${rx.toFixed(0)}" y1="${ry.toFixed(0)}" x2="${(rx+3).toFixed(0)}" y2="${(ry+10).toFixed(0)}" stroke="${INK}" stroke-width="0.4" opacity="0.55"/>`;
+    }
+  }
+
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+/* THE WIND — drifting strokes across the field, a pennant in the centre. */
+function illusWind() {
+  seedRand(202);
+  const W_ = 520, H = 180;
+  const c = nowConditions();
+  const wPower = Math.min(1, (c.wind_kph) / 35);
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+
+  /* Sky */
+  if (c.is_dark) {
+    s += hatch(`<rect x="0" y="0" width="${W_}" height="${H}"/>`, 0, 0, W_, H, 65, 4, 0.45);
+  } else if (c.is_overcast) {
+    s += hatch(`<rect x="0" y="0" width="${W_}" height="${H}"/>`, 0, 0, W_, H, 65, 6, 0.4);
+  }
+
+  /* Drifting strokes — density and angle vary with wind power */
+  const numStrokes = 18 + Math.floor(wPower * 30);
+  const angle = -10 + wPower * 15;  /* harder wind = more diagonal */
+  for (let i = 0; i < numStrokes; i++) {
+    const sx = sr() * W_;
+    const sy = 12 + sr() * (H - 24);
+    const len = 14 + sr() * (20 + wPower * 30);
+    const ex = sx + len * Math.cos(angle * Math.PI/180);
+    const ey = sy + len * Math.sin(angle * Math.PI/180);
+    const op = 0.3 + sr() * 0.4;
+    const sw = 0.4 + sr() * 0.3;
+    s += `<line x1="${sx.toFixed(0)}" y1="${sy.toFixed(0)}" x2="${ex.toFixed(0)}" y2="${ey.toFixed(0)}" stroke="${INK}" stroke-width="${sw.toFixed(1)}" opacity="${op.toFixed(2)}"/>`;
+  }
+
+  /* A tall flagpole with pennant in centre, the pennant's curve indicates wind */
+  const poleX = 260;
+  s += `<rect x="${poleX-1}" y="40" width="2" height="${H - 50}" fill="${INK}"/>`;
+  s += `<circle cx="${poleX}" cy="40" r="2.5" fill="${INK}"/>`;
+  /* pennant */
+  const flutter = wPower * 12;
+  s += `<path d="M${poleX+1},45
+    Q${poleX + 30 + flutter},${48 + flutter * 0.4}
+      ${poleX + 70 + flutter * 1.5},${52 + flutter * 0.6}
+    L${poleX + 60 + flutter * 1.5},${56 + flutter * 0.6}
+    L${poleX + 70 + flutter * 1.5},${60 + flutter * 0.6}
+    Q${poleX + 30 + flutter},${56 + flutter * 0.4}
+      ${poleX+1},${65}
+    Z" fill="${INK}"/>`;
+
+  /* If calm, a few leaves at the foot of the pole instead of strokes */
+  if (c.is_calm) {
+    for (let i = 0; i < 6; i++) {
+      const lx = poleX - 30 + sr() * 60;
+      const ly = H - 18 + sr() * 6;
+      s += `<ellipse cx="${lx.toFixed(0)}" cy="${ly.toFixed(0)}" rx="3" ry="1.5" fill="${INK}" transform="rotate(${(sr()*60-30).toFixed(0)} ${lx.toFixed(0)} ${ly.toFixed(0)})"/>`;
+    }
+  }
+
+  /* Ground line */
+  s += `<line x1="0" y1="${H-12}" x2="${W_}" y2="${H-12}" stroke="${INK}" stroke-width="0.8"/>`;
+
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+/* THE AIR — particle density showing pollution. Lorry on right, particles drifting left. */
+function illusAir() {
+  seedRand(303);
+  const W_ = 520, H = 180;
+  const c = nowConditions();
+  const dirty = c.no2 != null ? Math.min(1, c.no2 / 80) : 0.4;
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+
+  /* Soft hatched sky if foul */
+  if (dirty > 0.5) {
+    s += hatch(`<rect x="0" y="20" width="${W_}" height="100"/>`, 0, 20, W_, 100, 65, 4 - dirty * 2, 0.4);
+  } else {
+    s += hatch(`<rect x="0" y="20" width="${W_}" height="40"/>`, 0, 20, W_, 40, 65, 7, 0.4);
+  }
+
+  /* A row of low buildings on the horizon */
+  const horizonY = 130;
+  s += `<rect x="0" y="${horizonY-30}" width="60" height="30" fill="${INK}"/>`;
+  s += `<rect x="60" y="${horizonY-22}" width="40" height="22" fill="${INK}"/>`;
+  s += `<rect x="100" y="${horizonY-34}" width="50" height="34" fill="${INK}"/>`;
+  s += `<rect x="150" y="${horizonY-26}" width="40" height="26" fill="${INK}"/>`;
+  s += `<rect x="195" y="${horizonY-32}" width="55" height="32" fill="${INK}"/>`;
+  s += `<rect x="320" y="${horizonY-22}" width="60" height="22" fill="${INK}"/>`;
+  s += `<rect x="380" y="${horizonY-30}" width="50" height="30" fill="${INK}"/>`;
+  /* a few cream windows */
+  for (let i = 0; i < 12; i++) {
+    const wx = 5 + sr() * 425, wy = horizonY - 10 + sr() * 6;
+    s += `<rect x="${wx.toFixed(0)}" y="${wy.toFixed(0)}" width="2" height="3" fill="${PAPER}"/>`;
+  }
+
+  /* The road */
+  s += `<line x1="0" y1="${horizonY}" x2="${W_}" y2="${horizonY}" stroke="${INK}" stroke-width="1"/>`;
+  s += `<rect x="0" y="${horizonY}" width="${W_}" height="${H - horizonY - 12}" fill="${INK}"/>`;
+  for (let i = 0; i < 8; i++) {
+    s += `<rect x="${20 + i * 60}" y="${horizonY + 14}" width="20" height="2" fill="${PAPER}"/>`;
+  }
+
+  /* A lorry on the right, source of exhaust */
+  const lx = 410, ly = horizonY - 28;
+  s += `<rect x="${lx}" y="${ly}" width="60" height="22" fill="${INK}"/>`;
+  s += `<rect x="${lx + 40}" y="${ly - 14}" width="20" height="14" fill="${INK}"/>`;
+  s += `<rect x="${lx + 42}" y="${ly - 12}" width="6" height="6" fill="${PAPER}"/>`;
+  /* wheels */
+  s += `<circle cx="${lx + 12}" cy="${horizonY}" r="4" fill="${INK}"/>`;
+  s += `<circle cx="${lx + 30}" cy="${horizonY}" r="4" fill="${INK}"/>`;
+  s += `<circle cx="${lx + 52}" cy="${horizonY}" r="4" fill="${INK}"/>`;
+  s += `<circle cx="${lx + 12}" cy="${horizonY}" r="1.4" fill="${PAPER}"/>`;
+  s += `<circle cx="${lx + 30}" cy="${horizonY}" r="1.4" fill="${PAPER}"/>`;
+  s += `<circle cx="${lx + 52}" cy="${horizonY}" r="1.4" fill="${PAPER}"/>`;
+  /* exhaust pipe */
+  s += `<rect x="${lx + 36}" y="${ly - 8}" width="3" height="3" fill="${INK}"/>`;
+
+  /* Exhaust particles drifting left, density by NO2 */
+  const numParticles = Math.floor(40 + dirty * 200);
+  for (let i = 0; i < numParticles; i++) {
+    const dx = sr() * 360;  /* particle has drifted this far from source */
+    const px = lx + 38 - dx;
+    if (px < 4) continue;
+    /* upward drift increases with distance */
+    const py = ly - 6 - dx * 0.18 - sr() * (10 + dx * 0.1);
+    if (py < 24) continue;
+    const r = 0.4 + sr() * 0.7;
+    const op = 0.2 + dirty * 0.4 + sr() * 0.2;
+    s += `<circle cx="${px.toFixed(0)}" cy="${py.toFixed(0)}" r="${r.toFixed(1)}" fill="${INK}" opacity="${op.toFixed(2)}"/>`;
+  }
+
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+/* THE LAMPS — a row of lamp posts at evening, lit if dark. */
+function illusLamps() {
+  seedRand(404);
+  const W_ = 520, H = 180;
+  const c = nowConditions();
+  const lit = c.is_dark || c.is_dawn;
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+
+  /* Sky */
+  if (c.is_dark) {
+    s += hatch(`<rect x="0" y="0" width="${W_}" height="120"/>`, 0, 0, W_, 120, 65, 3, 0.5);
+    /* stars */
+    for (let i = 0; i < 14; i++) {
+      const sx = 30 + sr() * (W_ - 60), sy = 8 + sr() * 80;
+      s += `<circle cx="${sx.toFixed(0)}" cy="${sy.toFixed(0)}" r="1.2" fill="${PAPER}"/>`;
+    }
+  } else if (c.is_dawn) {
+    s += hatch(`<rect x="0" y="0" width="${W_}" height="80"/>`, 0, 0, W_, 80, 65, 5, 0.4);
+  } else {
+    /* sparse sky for daytime */
+    s += hatch(`<rect x="0" y="0" width="${W_}" height="40"/>`, 0, 0, W_, 40, 65, 8, 0.4);
+  }
+
+  /* Terrace silhouette behind */
+  const baseY = 130;
+  let tx = 0;
+  while (tx < W_) {
+    const tw = 40 + Math.floor(sr() * 20);
+    const th = 30 + Math.floor(sr() * 24);
+    const top = baseY - th;
+    s += `<rect x="${tx}" y="${top}" width="${tw}" height="${th}" fill="${INK}"/>`;
+    s += `<path d="M${tx-1},${top} L${tx + tw/2},${top - 7} L${tx + tw + 1},${top} Z" fill="${INK}"/>`;
+    /* small chimney */
+    if (sr() > 0.5) {
+      const chx = tx + tw * 0.7;
+      s += `<rect x="${chx}" y="${top - 14}" width="3" height="10" fill="${INK}"/>`;
+    }
+    /* a window or two — lit if night */
+    if (lit && sr() > 0.4) {
+      s += `<rect x="${tx + 8}" y="${top + 8}" width="5" height="4" fill="${PAPER}"/>`;
+    }
+    tx += tw - 1;
+  }
+
+  /* Pavement and road */
+  s += `<rect x="0" y="${baseY}" width="${W_}" height="14" fill="${PAPER}"/>`;
+  s += `<line x1="0" y1="${baseY}" x2="${W_}" y2="${baseY}" stroke="${INK}" stroke-width="1"/>`;
+  s += `<line x1="0" y1="${baseY+14}" x2="${W_}" y2="${baseY+14}" stroke="${INK}" stroke-width="1"/>`;
+  for (let i = 0; i < 18; i++) s += `<line x1="${i*W_/18+5}" y1="${baseY}" x2="${i*W_/18+5}" y2="${baseY+14}" stroke="${INK}" stroke-width="0.4"/>`;
+  s += `<rect x="0" y="${baseY+14}" width="${W_}" height="${H - baseY - 14 - 8}" fill="${INK}"/>`;
+
+  /* Three lamp posts at intervals */
+  const lampPositions = [110, 260, 410];
+  lampPositions.forEach(lampX => {
+    s += `<rect x="${lampX-1}" y="${baseY-72}" width="2.5" height="72" fill="${INK}"/>`;
+    s += `<path d="M${lampX-1},${baseY-72} q-5,-3 -10,0 q-1,1 0,3 l12,0" fill="${INK}"/>`;
+    s += `<rect x="${lampX-11}" y="${baseY-74}" width="8" height="8" fill="${INK}"/>`;
+    if (lit) {
+      /* halo */
+      s += `<circle cx="${lampX-7}" cy="${baseY-70}" r="5" fill="${PAPER}" stroke="${INK}" stroke-width="0.5"/>`;
+      /* radiating short strokes */
+      for (let a = 0; a < 8; a++) {
+        const ang = a/8*Math.PI*2;
+        s += `<line x1="${lampX-7+Math.cos(ang)*7}" y1="${baseY-70+Math.sin(ang)*7}" x2="${lampX-7+Math.cos(ang)*12}" y2="${baseY-70+Math.sin(ang)*12}" stroke="${INK}" stroke-width="0.6"/>`;
+      }
+      /* pool of light on pavement */
+      s += `<ellipse cx="${lampX-7}" cy="${baseY+8}" rx="28" ry="6" fill="${PAPER}" opacity="0.5"/>`;
+    }
+  });
+
+  /* Rain streaks */
+  if (c.is_raining) {
+    for (let i = 0; i < 50; i++) {
+      const rx = sr() * W_, ry = sr() * (H - 20);
+      s += `<line x1="${rx.toFixed(0)}" y1="${ry.toFixed(0)}" x2="${(rx+3).toFixed(0)}" y2="${(ry+10).toFixed(0)}" stroke="${INK}" stroke-width="0.4" opacity="0.5"/>`;
+    }
+  }
+
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+/* THE POLLEN — a single tree with particles drifting. Mute if no pollen. */
+function illusPollen() {
+  seedRand(505);
+  const W_ = 520, H = 180;
+  const c = nowConditions();
+  const dom = pollenDominant();
+  const density = Math.min(1, c.pollen_total / 80);
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+
+  /* Sparse sky */
+  s += hatch(`<rect x="0" y="0" width="${W_}" height="36"/>`, 0, 0, W_, 36, 65, 7, 0.4);
+
+  /* Ground */
+  const groundY = 165;
+  s += `<line x1="0" y1="${groundY}" x2="${W_}" y2="${groundY}" stroke="${INK}" stroke-width="1.2"/>`;
+  for (let i = 0; i < 30; i++) {
+    s += `<line x1="${i*W_/30}" y1="${groundY}" x2="${i*W_/30 + 2}" y2="${groundY+5}" stroke="${INK}" stroke-width="0.4" opacity="0.5"/>`;
+  }
+
+  /* The tree — single confident silhouette, slightly off-centre to leave drift-room */
+  const tx = 160;
+  /* trunk */
+  s += `<path d="M${tx-10},${groundY} Q${tx-8},${groundY-30} ${tx-7},${groundY-60} Q${tx-5},${groundY-90} ${tx-3},${groundY-110} L${tx+3},${groundY-110} Q${tx+5},${groundY-90} ${tx+7},${groundY-60} Q${tx+8},${groundY-30} ${tx+10},${groundY} Z" fill="${INK}"/>`;
+  /* branches — eight or so radiating up and out */
+  const branches = [
+    [tx, groundY-110, tx-90, 30, 4],
+    [tx, groundY-110, tx-50, 12, 4],
+    [tx, groundY-110, tx, 10, 5],
+    [tx, groundY-110, tx+50, 14, 4],
+    [tx, groundY-110, tx+95, 32, 4],
+    [tx, groundY-110, tx-110, 70, 3],
+    [tx, groundY-110, tx+115, 75, 3],
+    [tx, groundY-110, tx-30, 45, 3],
+    [tx, groundY-110, tx+30, 48, 3]
+  ];
+  branches.forEach(([x1,y1,x2,y2,bw]) => {
+    s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${INK}" stroke-width="${bw}" stroke-linecap="round"/>`;
+    /* a few twigs at branch-end */
+    for (let i = 0; i < 5; i++) {
+      const tex = x2 + (sr() - 0.5) * 30;
+      const tey = y2 - 8 - sr() * 12;
+      s += `<line x1="${x2}" y1="${y2}" x2="${tex.toFixed(0)}" y2="${tey.toFixed(0)}" stroke="${INK}" stroke-width="0.7"/>`;
+    }
+  });
+  /* a scatter of dark catkins/buds among the branches */
+  for (let i = 0; i < 30; i++) {
+    const cx = tx + (sr() - 0.5) * 200;
+    const cy = (groundY - 110) + sr() * 70;
+    if (cy < 20) continue;
+    s += `<ellipse cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" rx="2" ry="1" fill="${INK}" transform="rotate(${(sr()*60-30).toFixed(0)} ${cx.toFixed(0)} ${cy.toFixed(0)})"/>`;
+  }
+
+  /* Pollen drift to the right */
+  if (density > 0.05) {
+    const numParticles = Math.floor(80 + density * 200);
+    for (let i = 0; i < numParticles; i++) {
+      const dx = sr() * 320;
+      const px = tx + 30 + dx;
+      if (px > W_ - 10) continue;
+      const py = 30 + sr() * 100 - dx * 0.1;
+      if (py < 12 || py > groundY - 5) continue;
+      /* density falls with distance */
+      const distRatio = dx / 320;
+      if (sr() > 1 - distRatio * 0.6) continue;
+      s += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${(0.3 + sr() * 0.4).toFixed(1)}" fill="${INK}" opacity="${(0.3 + density * 0.4).toFixed(2)}"/>`;
+    }
+  }
+
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+/* THE ALMANAC — a circular calendar with the day's date, sun, moon. */
+function illusAlmanac() {
+  seedRand(606);
+  const W_ = 520, H = 180;
+  const c = nowConditions();
+  const now = new Date();
+  let s = `<svg viewBox="0 0 ${W_} ${H}" xmlns="http://www.w3.org/2000/svg"><rect width="${W_}" height="${H}" fill="${PAPER}"/>`;
+
+  /* The almanac is a circular dial at centre, with the hour hand at current time
+     and decorative engravings around. */
+  const cx = W_/2, cy = H/2 + 4;
+  const dialR = 60;
+
+  /* outer ring */
+  s += `<circle cx="${cx}" cy="${cy}" r="${dialR}" fill="${PAPER}" stroke="${INK}" stroke-width="1.5"/>`;
+  s += `<circle cx="${cx}" cy="${cy}" r="${dialR-5}" fill="none" stroke="${INK}" stroke-width="0.5"/>`;
+  s += `<circle cx="${cx}" cy="${cy}" r="${dialR-12}" fill="none" stroke="${INK}" stroke-width="0.3"/>`;
+
+  /* twelve marks */
+  for (let i = 0; i < 12; i++) {
+    const ang = (i / 12) * Math.PI * 2 - Math.PI/2;
+    const ix = cx + Math.cos(ang) * (dialR - 5);
+    const iy = cy + Math.sin(ang) * (dialR - 5);
+    const ox = cx + Math.cos(ang) * (dialR - 1);
+    const oy = cy + Math.sin(ang) * (dialR - 1);
+    s += `<line x1="${ix.toFixed(1)}" y1="${iy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${oy.toFixed(1)}" stroke="${INK}" stroke-width="${i % 3 === 0 ? 1.4 : 0.6}"/>`;
+  }
+
+  /* sun and moon symbols at top of dial */
+  const isDay = !c.is_dark;
+  if (isDay) {
+    /* sun */
+    s += `<circle cx="${cx}" cy="${cy - dialR + 22}" r="6" fill="${INK}"/>`;
+    for (let a = 0; a < 8; a++) {
+      const ang = (a/8)*Math.PI*2;
+      const sx2 = cx + Math.cos(ang) * 9;
+      const sy2 = cy - dialR + 22 + Math.sin(ang) * 9;
+      const sx3 = cx + Math.cos(ang) * 13;
+      const sy3 = cy - dialR + 22 + Math.sin(ang) * 13;
+      s += `<line x1="${sx2.toFixed(1)}" y1="${sy2.toFixed(1)}" x2="${sx3.toFixed(1)}" y2="${sy3.toFixed(1)}" stroke="${INK}" stroke-width="1.2"/>`;
+    }
+  } else {
+    /* moon — crescent */
+    s += `<circle cx="${cx}" cy="${cy - dialR + 22}" r="7" fill="${INK}"/>`;
+    s += `<circle cx="${cx + 3}" cy="${cy - dialR + 21}" r="6" fill="${PAPER}"/>`;
+  }
+
+  /* hour hand */
+  const hourFrac = (now.getHours() + now.getMinutes()/60) / 24;
+  const handAng = hourFrac * Math.PI * 2 - Math.PI/2;
+  s += `<line x1="${cx}" y1="${cy}" x2="${(cx + Math.cos(handAng) * (dialR - 16)).toFixed(1)}" y2="${(cy + Math.sin(handAng) * (dialR - 16)).toFixed(1)}" stroke="${INK}" stroke-width="2.5" stroke-linecap="round"/>`;
+  s += `<circle cx="${cx}" cy="${cy}" r="3" fill="${INK}"/>`;
+
+  /* Decorative leaves left and right depending on season */
+  const seasonSymbols = c.is_winter ? 'bare' : c.is_spring ? 'buds' : c.is_summer ? 'leaves' : 'falling';
+  function ornament(sx, sy, mirror) {
+    let out = '';
+    /* a curving stem */
+    const dir = mirror ? -1 : 1;
+    out += `<path d="M${sx},${sy} q${15*dir},-10 ${30*dir},-20 q${5*dir},-15 ${0*dir},-30" fill="none" stroke="${INK}" stroke-width="1.2"/>`;
+    if (seasonSymbols === 'leaves') {
+      /* fat leaves */
+      for (let i = 0; i < 3; i++) {
+        const lx = sx + dir * (12 + i * 8);
+        const ly = sy - i * 18;
+        out += `<ellipse cx="${lx}" cy="${ly}" rx="6" ry="3" fill="${INK}" transform="rotate(${dir * 30} ${lx} ${ly})"/>`;
+      }
+    } else if (seasonSymbols === 'buds') {
+      /* small buds */
+      for (let i = 0; i < 4; i++) {
+        const lx = sx + dir * (10 + i * 6);
+        const ly = sy - i * 14;
+        out += `<circle cx="${lx}" cy="${ly}" r="2" fill="${INK}"/>`;
+      }
+    } else if (seasonSymbols === 'falling') {
+      /* falling leaves */
+      for (let i = 0; i < 4; i++) {
+        const lx = sx + dir * (8 + i * 12);
+        const ly = sy - i * 14 + i * 4;
+        out += `<ellipse cx="${lx}" cy="${ly}" rx="4" ry="2" fill="${INK}" transform="rotate(${(sr()*120 - 60).toFixed(0)} ${lx} ${ly})"/>`;
+      }
+    } else {
+      /* bare branch */
+      for (let i = 0; i < 4; i++) {
+        const lx = sx + dir * (8 + i * 7);
+        const ly = sy - i * 16;
+        out += `<line x1="${lx}" y1="${ly}" x2="${lx + dir * 8}" y2="${ly - 6}" stroke="${INK}" stroke-width="0.6"/>`;
+        out += `<line x1="${lx}" y1="${ly}" x2="${lx - dir * 4}" y2="${ly - 8}" stroke="${INK}" stroke-width="0.5"/>`;
+      }
+    }
+    return out;
+  }
+  s += ornament(cx - dialR - 30, cy + 50, false);
+  s += ornament(cx + dialR + 30, cy + 50, true);
+
+  /* Date label below dial */
+  const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
+  s += `<text x="${cx}" y="${cy + dialR + 14}" text-anchor="middle" font-family="UnifrakturCook, serif" font-size="12" fill="${INK}">${dateStr}</text>`;
+
+  s += frame(W_, H) + '</svg>';
+  return s;
+}
+
+function pollenDominant() {
+  if (!W.air) return null;
+  const counts = {
+    birch:   W.air.birch_pollen   || 0,
+    alder:   W.air.alder_pollen   || 0,
+    grass:   W.air.grass_pollen   || 0,
+    mugwort: W.air.mugwort_pollen || 0,
+    ragweed: W.air.ragweed_pollen || 0,
+    olive:   W.air.olive_pollen   || 0
+  };
+  let dom = null, max = 0;
+  for (const [k, v] of Object.entries(counts)) if (v > max) { dom = k; max = v; }
+  return max < 1 ? null : dom;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VOICES — each speaker says its line in plain English
+   ═══════════════════════════════════════════════════════════════════════════ */
+const VOICES = {
+  thames: () => {
+    const c = nowConditions();
+    if (c.tide_m == null) return 'I am the Thames. I am here, somewhere in my cycle.';
+    if (c.tide_m > 5) return `I am running hard tonight. I am up to ${c.tide_m.toFixed(1)} metres, the foreshore long covered.`;
+    if (c.tide_m > 4) return `I am high. I am at ${c.tide_m.toFixed(1)} metres, the wall awash at its base.`;
+    if (c.tide_m > 3) return `I am still rising — ${c.tide_m.toFixed(1)} metres, two feet short of my mark.`;
+    if (c.tide_m > 2) return `I am midway: ${c.tide_m.toFixed(1)} metres, neither out nor in.`;
+    if (c.tide_m > 1) return `I am pulling out. I am down to ${c.tide_m.toFixed(1)} metres, a brown skin of mud beginning to show.`;
+    return `I am all but out, only ${c.tide_m.toFixed(1)} metres deep. The gravel and the rope and the stone of the foreshore are mine again.`;
+  },
+  wind: () => {
+    const c = nowConditions();
+    const w = c.wind_kph;
+    if (w > 35) return `I am up tonight, hard from the south-east — ${Math.round(w)} kilometres an hour.`;
+    if (w > 22) return `I am steady off the river, at ${Math.round(w)} kilometres an hour.`;
+    if (w > 12) return `I am light from the south-east, ${Math.round(w)} kilometres an hour.`;
+    if (w > 5)  return `I am only a breath, ${Math.round(w)} kilometres an hour.`;
+    return 'I am dead calm. The leaves are still.';
+  },
+  air: () => {
+    const c = nowConditions();
+    if (c.no2 == null) return 'I am the air over London. I have nothing to report.';
+    if (c.no2 > 80) return `I am foul tonight. The reading is ${Math.round(c.no2)} micrograms of nitrogen dioxide, well above the limit.`;
+    if (c.no2 > 50) return `I am carrying the lorries' breath: ${Math.round(c.no2)} micrograms of NO\u2082.`;
+    if (c.no2 > 25) return `I am ordinary London air: ${Math.round(c.no2)} micrograms of NO\u2082, neither clean nor noticeably foul.`;
+    if (c.no2 > 10) return `I am cleaner than usual today: ${Math.round(c.no2)} micrograms of NO\u2082. Take it as a small gift.`;
+    return `I am unusually clean: only ${Math.round(c.no2)} micrograms of NO\u2082. A wind has been through me.`;
+  },
+  lamps: () => {
+    const c = nowConditions();
+    if (c.is_dawn) return 'We are still on, but the morning is arguing with us.';
+    if (c.is_late_night && c.is_raining) return 'We are lit, and we are making haloes in the wet.';
+    if (c.is_late_night) return 'We are lit, though there is no one for us to light.';
+    if (c.is_dark) return 'We are lit. The streets have settled into our care.';
+    return 'We are unlit. The day has us.';
+  },
+  pollen: () => {
+    const c = nowConditions();
+    const dom = pollenDominant();
+    if (!dom || c.pollen_total < 5) return 'I am quiet. Nothing of mine is up today.';
+    const phrases = {
+      birch:   `The birches are heavy on the air — ${Math.round(W.air.birch_pollen)} grains per cubic metre.`,
+      alder:   `The alders are out — ${Math.round(W.air.alder_pollen)} grains per cubic metre.`,
+      grass:   `The grass is up across the south of the river — ${Math.round(W.air.grass_pollen)} grains per cubic metre.`,
+      mugwort: `The mugwort is in along the verges — ${Math.round(W.air.mugwort_pollen)} grains per cubic metre.`,
+      ragweed: `The ragweed is on the wind, late this year — ${Math.round(W.air.ragweed_pollen)} grains per cubic metre.`,
+      olive:   `The olives are out, late and unusual for here — ${Math.round(W.air.olive_pollen)} grains per cubic metre.`
+    };
+    return phrases[dom];
+  },
+  almanac: () => {
+    const c = nowConditions();
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+    const hr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    let saint = '';
+    const mmdd = `${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+    const ALMANAC = {
+      '01-06':'Twelfth Night','02-02':'Candlemas','02-14':"St Valentine's Day",
+      '03-17':"St Patrick's Day",'03-25':'Lady Day','04-23':"St George's Day",
+      '05-01':'May Day','06-21':'Midsummer (the longest day)','07-15':"St Swithin's Day",
+      '08-01':'Lammas','09-29':'Michaelmas','10-31':"All Hallows' Eve",
+      '11-01':"All Saints' Day",'11-02':"All Souls' Day",'11-11':'Armistice Day',
+      '12-21':'the winter solstice (the longest night)','12-25':'Christmas Day'
+    };
+    if (ALMANAC[mmdd]) saint = ` — by the older calendar, ${ALMANAC[mmdd]}.`;
+    return `It is ${dateStr}. The hour is ${hr}.${saint}`;
+  }
+};
+
+function readingLine(speaker) {
+  const c = nowConditions();
+  switch (speaker) {
+    case 'thames': return c.tide_m != null ? `TIDE  ${c.tide_m.toFixed(1)}M  · ${c.tide_m > 4 ? 'HIGH' : c.tide_m > 2.5 ? 'RISING' : c.tide_m > 1.5 ? 'EBBING' : 'LOW'}` : 'TIDE  —';
+    case 'wind':   return `WIND  ${Math.round(c.wind_kph)} KPH  ·  FROM THE ${windDirShort(W.weather?.wind_direction_10m)}`;
+    case 'air':    return c.no2 != null ? `NO\u2082  ${Math.round(c.no2)} \u00B5G/M\u00B3  ·  PM10  ${Math.round(W.air?.pm10 || 0)}` : 'NO\u2082  —';
+    case 'lamps':  return c.is_dark ? 'LAMPS LIT' : c.is_dawn ? 'LAMPS LIT — DAWN COMING' : 'LAMPS UNLIT';
+    case 'pollen': {
+      const dom = pollenDominant();
+      if (!dom) return 'POLLEN  QUIET';
+      const v = W.air[dom + '_pollen'] || 0;
+      return `POLLEN  ${dom.toUpperCase()}  ${Math.round(v)} GRAINS/M\u00B3`;
+    }
+    case 'almanac': {
+      const sr = W.sun?.sunrise ? new Date(W.sun.sunrise).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) : '—';
+      const ss = W.sun?.sunset ? new Date(W.sun.sunset).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) : '—';
+      return `SUNRISE  ${sr}  ·  SUNSET  ${ss}`;
+    }
+  }
+  return '';
+}
+
+function windDirShort(deg) {
+  if (deg == null) return '—';
+  const dirs = ['N','NE','E','SE','S','SW','W','NW'];
+  return dirs[Math.round(((deg % 360) / 45)) % 8];
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE POEMS — public domain (UK: author died before 1955).
+   Each speaker has a small anthology; current condition selects.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const POEMS = {
+
+  thames: [
+    {
+      when: c => c.is_high_tide || (c.tide_m != null && c.tide_m > 3.5),
+      title: 'Composed Upon Westminster Bridge, September 3, 1802',
+      author: 'William Wordsworth',
+      year: '1807',
+      author_died: 1850,
+      body: `<div class="stanza">
+        <p>Earth has not any thing to show more fair:</p>
+        <p>Dull would he be of soul who could pass by</p>
+        <p>A sight so touching in its majesty:</p>
+        <p>This City now doth, like a garment, wear</p>
+        <p>The beauty of the morning; silent, bare,</p>
+        <p>Ships, towers, domes, theatres, and temples lie</p>
+        <p>Open unto the fields, and to the sky;</p>
+        <p>All bright and glittering in the smokeless air.</p>
+        <p>Never did sun more beautifully steep</p>
+        <p>In his first splendour, valley, rock, or hill;</p>
+        <p>Ne'er saw I, never felt, a calm so deep!</p>
+        <p>The river glideth at his own sweet will:</p>
+        <p>Dear God! the very houses seem asleep;</p>
+        <p>And all that mighty heart is lying still!</p>
+      </div>`
+    },
+    {
+      when: c => c.is_low_tide,
+      title: 'Inversnaid (extract)',
+      author: 'Gerard Manley Hopkins',
+      year: '1881',
+      author_died: 1889,
+      body: `<div class="stanza">
+        <p>This darksome burn, horseback brown,</p>
+        <p>His rollrock highroad roaring down,</p>
+        <p>In coop and in comb the fleece of his foam</p>
+        <p>Flutes and low to the lake falls home.</p>
+      </div>
+      <div class="stanza">
+        <p>What would the world be, once bereft</p>
+        <p>Of wet and of wildness? Let them be left,</p>
+        <p>O let them be left, wildness and wet;</p>
+        <p>Long live the weeds and the wilderness yet.</p>
+      </div>`
+    },
+    {
+      when: () => true, /* default */
+      title: 'Prothalamion (refrain)',
+      author: 'Edmund Spenser',
+      year: '1596',
+      author_died: 1599,
+      body: `<div class="stanza">
+        <p>Sweet Thames! run softly, till I end my song.</p>
+      </div>
+      <div class="stanza" style="font-size: 0.86em; opacity: 0.75; margin-top: 16px;">
+        <p>The line, repeated as a refrain through Spenser's marriage-song for the daughters</p>
+        <p>of the Earl of Worcester, has been the river's most-quoted phrase ever since.</p>
+      </div>`
+    }
+  ],
+
+  wind: [
+    {
+      when: c => c.is_calm,
+      title: 'Who has seen the Wind?',
+      author: 'Christina Rossetti',
+      year: '1872',
+      author_died: 1894,
+      body: `<div class="stanza">
+        <p>Who has seen the wind?</p>
+        <p>Neither I nor you:</p>
+        <p>But when the leaves hang trembling,</p>
+        <p>The wind is passing through.</p>
+      </div>
+      <div class="stanza">
+        <p>Who has seen the wind?</p>
+        <p>Neither you nor I:</p>
+        <p>But when the trees bow down their heads,</p>
+        <p>The wind is passing by.</p>
+      </div>`
+    },
+    {
+      when: c => c.is_windy,
+      title: 'Ode to the West Wind (extract)',
+      author: 'Percy Bysshe Shelley',
+      year: '1820',
+      author_died: 1822,
+      body: `<div class="stanza">
+        <p>O wild West Wind, thou breath of Autumn's being,</p>
+        <p>Thou, from whose unseen presence the leaves dead</p>
+        <p>Are driven, like ghosts from an enchanter fleeing,</p>
+      </div>
+      <div class="stanza">
+        <p>Yellow, and black, and pale, and hectic red,</p>
+        <p>Pestilence-stricken multitudes: O thou,</p>
+        <p>Who chariotest to their dark wintry bed</p>
+      </div>
+      <div class="stanza">
+        <p>The wingèd seeds, where they lie cold and low,</p>
+        <p>Each like a corpse within its grave, until</p>
+        <p>Thine azure sister of the Spring shall blow</p>
+      </div>
+      <div class="stanza">
+        <p>Her clarion o'er the dreaming earth, and fill</p>
+        <p>(Driving sweet buds like flocks to feed in air)</p>
+        <p>With living hues and odours plain and hill...</p>
+      </div>`
+    },
+    {
+      when: () => true,
+      title: 'The Windhover (extract)',
+      author: 'Gerard Manley Hopkins',
+      year: '1877',
+      author_died: 1889,
+      body: `<div class="stanza">
+        <p>I caught this morning morning's minion, king-</p>
+        <p>dom of daylight's dauphin, dapple-dawn-drawn Falcon, in his riding</p>
+        <p>Of the rolling level underneath him steady air, and striding</p>
+        <p>High there, how he rung upon the rein of a wimpling wing</p>
+        <p>In his ecstasy! then off, off forth on swing,</p>
+        <p>As a skate's heel sweeps smooth on a bow-bend...</p>
+      </div>`
+    }
+  ],
+
+  air: [
+    {
+      when: c => c.no2 != null && c.no2 > 50,
+      title: 'London',
+      author: 'William Blake',
+      year: '1794',
+      author_died: 1827,
+      body: `<div class="stanza">
+        <p>I wander thro' each charter'd street,</p>
+        <p>Near where the charter'd Thames does flow.</p>
+        <p>And mark in every face I meet</p>
+        <p>Marks of weakness, marks of woe.</p>
+      </div>
+      <div class="stanza">
+        <p>In every cry of every Man,</p>
+        <p>In every Infants cry of fear,</p>
+        <p>In every voice: in every ban,</p>
+        <p>The mind-forg'd manacles I hear.</p>
+      </div>
+      <div class="stanza">
+        <p>How the Chimney-sweepers cry</p>
+        <p>Every blackning Church appalls,</p>
+        <p>And the hapless Soldiers sigh</p>
+        <p>Runs in blood down Palace walls.</p>
+      </div>
+      <div class="stanza">
+        <p>But most thro' midnight streets I hear</p>
+        <p>How the youthful Harlots curse</p>
+        <p>Blasts the new-born Infants tear</p>
+        <p>And blights with plagues the Marriage hearse.</p>
+      </div>`
+    },
+    {
+      when: c => c.no2 != null && c.no2 < 25,
+      title: 'Adlestrop',
+      author: 'Edward Thomas',
+      year: '1915',
+      author_died: 1917,
+      body: `<div class="stanza">
+        <p>Yes. I remember Adlestrop —</p>
+        <p>The name, because one afternoon</p>
+        <p>Of heat the express-train drew up there</p>
+        <p>Unwontedly. It was late June.</p>
+      </div>
+      <div class="stanza">
+        <p>The steam hissed. Someone cleared his throat.</p>
+        <p>No one left and no one came</p>
+        <p>On the bare platform. What I saw</p>
+        <p>Was Adlestrop — only the name —</p>
+      </div>
+      <div class="stanza">
+        <p>And willows, willow-herb, and grass,</p>
+        <p>And meadowsweet, and haycocks dry,</p>
+        <p>No whit less still and lonely fair</p>
+        <p>Than the high cloudlets in the sky.</p>
+      </div>
+      <div class="stanza">
+        <p>And for that minute a blackbird sang</p>
+        <p>Close by, and round him, mistier,</p>
+        <p>Farther and farther, all the birds</p>
+        <p>Of Oxfordshire and Gloucestershire.</p>
+      </div>`
+    },
+    {
+      when: () => true,
+      title: 'Leisure',
+      author: 'William Henry Davies',
+      year: '1911',
+      author_died: 1940,
+      body: `<div class="stanza">
+        <p>What is this life if, full of care,</p>
+        <p>We have no time to stand and stare.</p>
+      </div>
+      <div class="stanza">
+        <p>No time to stand beneath the boughs</p>
+        <p>And stare as long as sheep or cows.</p>
+      </div>
+      <div class="stanza">
+        <p>No time to see, when woods we pass,</p>
+        <p>Where squirrels hide their nuts in grass.</p>
+      </div>
+      <div class="stanza">
+        <p>No time to see, in broad daylight,</p>
+        <p>Streams full of stars, like skies at night.</p>
+      </div>
+      <div class="stanza">
+        <p>No time to turn at Beauty's glance,</p>
+        <p>And watch her feet, how they can dance.</p>
+      </div>
+      <div class="stanza">
+        <p>No time to wait till her mouth can</p>
+        <p>Enrich that smile her eyes began.</p>
+      </div>
+      <div class="stanza">
+        <p>A poor life this if, full of care,</p>
+        <p>We have no time to stand and stare.</p>
+      </div>`
+    }
+  ],
+
+  lamps: [
+    {
+      when: c => c.is_dark || c.is_dawn,
+      title: 'The Lamplighter',
+      author: 'Robert Louis Stevenson',
+      year: '1885',
+      author_died: 1894,
+      body: `<div class="stanza">
+        <p>My tea is nearly ready and the sun has left the sky;</p>
+        <p>It's time to take the window to see Leerie going by;</p>
+        <p>For every night at teatime and before you take your seat,</p>
+        <p>With lantern and with ladder he comes posting up the street.</p>
+      </div>
+      <div class="stanza">
+        <p>Now Tom would be a driver and Maria go to sea,</p>
+        <p>And my papa's a banker and as rich as he can be;</p>
+        <p>But I, when I am stronger and can choose what I'm to do,</p>
+        <p>O Leerie, I'll go round at night and light the lamps with you!</p>
+      </div>
+      <div class="stanza">
+        <p>For we are very lucky, with a lamp before the door,</p>
+        <p>And Leerie stops to light it as he lights so many more;</p>
+        <p>And O! before you hurry by with ladder and with light,</p>
+        <p>O Leerie, see a little child and nod to him to-night!</p>
+      </div>`
+    },
+    {
+      when: () => true,
+      title: 'Composed Upon Westminster Bridge (closing lines)',
+      author: 'William Wordsworth',
+      year: '1807',
+      author_died: 1850,
+      body: `<div class="stanza">
+        <p>Ne'er saw I, never felt, a calm so deep!</p>
+        <p>The river glideth at his own sweet will:</p>
+        <p>Dear God! the very houses seem asleep;</p>
+        <p>And all that mighty heart is lying still!</p>
+      </div>
+      <div class="stanza" style="font-size: 0.86em; opacity: 0.75; margin-top: 16px;">
+        <p>The lamps know this hour. They go on as the city stops.</p>
+      </div>`
+    }
+  ],
+
+  pollen: [
+    {
+      when: c => c.is_spring,
+      title: 'Spring',
+      author: 'Gerard Manley Hopkins',
+      year: '1877',
+      author_died: 1889,
+      body: `<div class="stanza">
+        <p>Nothing is so beautiful as Spring —</p>
+        <p>When weeds, in wheels, shoot long and lovely and lush;</p>
+        <p>Thrush's eggs look little low heavens, and thrush</p>
+        <p>Through the echoing timber does so rinse and wring</p>
+        <p>The ear, it strikes like lightnings to hear him sing;</p>
+        <p>The glassy peartree leaves and blooms, they brush</p>
+        <p>The descending blue; that blue is all in a rush</p>
+        <p>With richness; the racing lambs too have fair their fling.</p>
+      </div>
+      <div class="stanza">
+        <p>What is all this juice and all this joy?</p>
+        <p>A strain of the earth's sweet being in the beginning</p>
+        <p>In Eden garden. — Have, get, before it cloy,</p>
+        <p>Before it cloud, Christ, lord, and sour with sinning,</p>
+        <p>Innocent mind and Mayday in girl and boy,</p>
+        <p>Most, O maid's child, thy choice and worthy the winning.</p>
+      </div>`
+    },
+    {
+      when: c => c.is_summer,
+      title: 'Loveliest of trees, the cherry now',
+      author: 'A. E. Housman',
+      year: '1896',
+      author_died: 1936,
+      body: `<div class="stanza">
+        <p>Loveliest of trees, the cherry now</p>
+        <p>Is hung with bloom along the bough,</p>
+        <p>And stands about the woodland ride</p>
+        <p>Wearing white for Eastertide.</p>
+      </div>
+      <div class="stanza">
+        <p>Now, of my threescore years and ten,</p>
+        <p>Twenty will not come again,</p>
+        <p>And take from seventy springs a score,</p>
+        <p>It only leaves me fifty more.</p>
+      </div>
+      <div class="stanza">
+        <p>And since to look at things in bloom</p>
+        <p>Fifty springs are little room,</p>
+        <p>About the woodlands I will go</p>
+        <p>To see the cherry hung with snow.</p>
+      </div>`
+    },
+    {
+      when: c => c.is_autumn,
+      title: 'To Autumn',
+      author: 'John Keats',
+      year: '1819',
+      author_died: 1821,
+      body: `<div class="stanza">
+        <p>Season of mists and mellow fruitfulness,</p>
+        <p>Close bosom-friend of the maturing sun;</p>
+        <p>Conspiring with him how to load and bless</p>
+        <p>With fruit the vines that round the thatch-eves run;</p>
+        <p>To bend with apples the moss'd cottage-trees,</p>
+        <p>And fill all fruit with ripeness to the core;</p>
+        <p>To swell the gourd, and plump the hazel shells</p>
+        <p>With a sweet kernel; to set budding more,</p>
+        <p>And still more, later flowers for the bees,</p>
+        <p>Until they think warm days will never cease,</p>
+        <p>For Summer has o'er-brimm'd their clammy cells.</p>
+      </div>`
+    },
+    {
+      when: () => true, /* winter / fallback */
+      title: 'The Darkling Thrush',
+      author: 'Thomas Hardy',
+      year: '1900',
+      author_died: 1928,
+      body: `<div class="stanza">
+        <p>I leant upon a coppice gate</p>
+        <p>When Frost was spectre-grey,</p>
+        <p>And Winter's dregs made desolate</p>
+        <p>The weakening eye of day.</p>
+        <p>The tangled bine-stems scored the sky</p>
+        <p>Like strings of broken lyres,</p>
+        <p>And all mankind that haunted nigh</p>
+        <p>Had sought their household fires.</p>
+      </div>
+      <div class="stanza">
+        <p>The land's sharp features seemed to be</p>
+        <p>The Century's corpse outleant,</p>
+        <p>His crypt the cloudy canopy,</p>
+        <p>The wind his death-lament.</p>
+        <p>The ancient pulse of germ and birth</p>
+        <p>Was shrunken hard and dry,</p>
+        <p>And every spirit upon earth</p>
+        <p>Seemed fervourless as I.</p>
+      </div>
+      <div class="stanza">
+        <p>At once a voice arose among</p>
+        <p>The bleak twigs overhead</p>
+        <p>In a full-hearted evensong</p>
+        <p>Of joy illimited;</p>
+        <p>An aged thrush, frail, gaunt, and small,</p>
+        <p>In blast-beruffled plume,</p>
+        <p>Had chosen thus to fling his soul</p>
+        <p>Upon the darkening air.</p>
+      </div>
+      <div class="stanza">
+        <p>So little cause for carolings</p>
+        <p>Of such ecstatic sound</p>
+        <p>Was written on terrestrial things</p>
+        <p>Afar or nigh around,</p>
+        <p>That I could think there trembled through</p>
+        <p>His happy good-night air</p>
+        <p>Some blessed Hope, whereof he knew</p>
+        <p>And I was unaware.</p>
+      </div>`
+    }
+  ],
+
+  almanac: [
+    {
+      when: c => c.month === 11 && new Date().getDate() >= 21, /* late December — solstice */
+      title: 'The Oxen',
+      author: 'Thomas Hardy',
+      year: '1915',
+      author_died: 1928,
+      body: `<div class="stanza">
+        <p>Christmas Eve, and twelve of the clock.</p>
+        <p>"Now they are all on their knees,"</p>
+        <p>An elder said as we sat in a flock</p>
+        <p>By the embers in hearthside ease.</p>
+      </div>
+      <div class="stanza">
+        <p>We pictured the meek mild creatures where</p>
+        <p>They dwelt in their strawy pen,</p>
+        <p>Nor did it occur to one of us there</p>
+        <p>To doubt they were kneeling then.</p>
+      </div>
+      <div class="stanza">
+        <p>So fair a fancy few would weave</p>
+        <p>In these years! Yet, I feel,</p>
+        <p>If someone said on Christmas Eve,</p>
+        <p>"Come; see the oxen kneel,</p>
+      </div>
+      <div class="stanza">
+        <p>"In the lonely barton by yonder coomb</p>
+        <p>Our childhood used to know,"</p>
+        <p>I should go with him in the gloom,</p>
+        <p>Hoping it might be so.</p>
+      </div>`
+    },
+    {
+      when: c => c.is_summer && c.month === 5, /* June — midsummer */
+      title: 'A Shropshire Lad II — Loveliest of trees',
+      author: 'A. E. Housman',
+      year: '1896',
+      author_died: 1936,
+      body: `<div class="stanza">
+        <p>And since to look at things in bloom</p>
+        <p>Fifty springs are little room,</p>
+        <p>About the woodlands I will go</p>
+        <p>To see the cherry hung with snow.</p>
+      </div>`
+    },
+    {
+      when: () => true,
+      title: 'Pied Beauty',
+      author: 'Gerard Manley Hopkins',
+      year: '1877',
+      author_died: 1889,
+      body: `<div class="stanza">
+        <p>Glory be to God for dappled things —</p>
+        <p>For skies of couple-colour as a brinded cow;</p>
+        <p>For rose-moles all in stipple upon trout that swim;</p>
+        <p>Fresh-firecoal chestnut-falls; finches' wings;</p>
+        <p>Landscape plotted and pieced — fold, fallow, and plough;</p>
+        <p>And áll trádes, their gear and tackle and trim.</p>
+      </div>
+      <div class="stanza">
+        <p>All things counter, original, spare, strange;</p>
+        <p>Whatever is fickle, freckled (who knows how?)</p>
+        <p>With swift, slow; sweet, sour; adazzle, dim;</p>
+        <p>He fathers-forth whose beauty is past change:</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Praise him.</p>
+      </div>`
+    }
+  ]
+};
+
+function pickPoem(speaker) {
+  const c = nowConditions();
+  const list = POEMS[speaker] || [];
+  for (const p of list) if (p.when(c)) return p;
+  return list[list.length - 1] || null;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE RENDER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const SPEAKERS = [
+  { id: 'thames',  label: 'told by the river',     name: 'The Thames',  illus: illusThames  },
+  { id: 'wind',    label: 'told by the wind',      name: 'The Wind',    illus: illusWind    },
+  { id: 'air',     label: 'told by the air',       name: 'The Air',     illus: illusAir     },
+  { id: 'lamps',   label: 'told by the lamps',     name: 'The Lamps',   illus: illusLamps   },
+  { id: 'pollen',  label: 'told by the pollen',    name: 'The Pollen',  illus: illusPollen  },
+  { id: 'almanac', label: 'told by the almanac',   name: 'The Almanac', illus: illusAlmanac }
+];
+
+function renderPage() {
+  const panels = document.getElementById('panels');
+  panels.innerHTML = '';
+
+  /* Masthead invocation — a single quiet line about today */
+  const now = new Date();
+  document.getElementById('masthead-date').textContent = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+  document.getElementById('invocation').textContent = composeInvocation();
+
+  for (const sp of SPEAKERS) {
+    const panel = document.createElement('section');
+    panel.className = 'panel';
+    panel.id = 'panel-' + sp.id;
+
+    const voice = VOICES[sp.id]();
+    const reading = readingLine(sp.id);
+    const poem = pickPoem(sp.id);
+    const isMute = isMuteSpeaker(sp.id);
+
+    let html = `
+      <div class="panel-header">
+        <div class="speaker-label">${sp.label}</div>
+        <div class="speaker-name">${sp.name}</div>
+      </div>
+      <div class="panel-illus">${sp.illus()}</div>
+      <div class="panel-voice${isMute ? ' mute' : ''}">${escapeHtml(voice)}</div>
+      <div class="panel-reading">${reading}</div>
+    `;
+
+    if (poem) {
+      html += `
+        <div class="panel-poem">
+          <div class="poem-toggle" onclick="togglePoem('${sp.id}')">
+            ${escapeHtml(toggleLabel(sp.id))}
+          </div>
+          <div class="poem-content" id="poem-${sp.id}">
+            <div class="poem-title">${escapeHtml(poem.title)}</div>
+            <div class="poem-attribution">${escapeHtml(poem.author)} &middot; ${poem.year}</div>
+            <div class="poem-body">${poem.body}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    panel.innerHTML = html;
+    panels.appendChild(panel);
+  }
+}
+
+function isMuteSpeaker(id) {
+  const c = nowConditions();
+  if (id === 'wind' && c.is_calm) return true;
+  if (id === 'lamps' && !c.is_dark && !c.is_dawn) return true;
+  if (id === 'pollen' && c.pollen_total < 5) return true;
+  return false;
+}
+
+function toggleLabel(speaker) {
+  const labels = {
+    thames:  'the river remembers a poem',
+    wind:    'the wind has known a poem',
+    air:     'the air carries a poem',
+    lamps:   'the lamps remember a poem',
+    pollen:  'the pollen brings a poem',
+    almanac: 'the almanac offers a poem'
+  };
+  return labels[speaker] || 'a poem';
+}
+
+function togglePoem(id) {
+  const el = document.getElementById('poem-' + id);
+  if (el) el.classList.toggle('open');
+}
+window.togglePoem = togglePoem;
+
+function composeInvocation() {
+  /* A single short line summarising the moment, in the page's voice. */
+  const c = nowConditions();
+  const parts = [];
+  if (c.is_dark) parts.push('It is dark over London.');
+  else if (c.is_dawn) parts.push('Dawn is over London.');
+  else if (c.hour < 12) parts.push('It is morning over London.');
+  else if (c.hour < 17) parts.push('It is afternoon over London.');
+  else parts.push('Evening is settling over London.');
+
+  if (c.is_heavy_rain) parts.push('Heavy rain is falling.');
+  else if (c.is_raining) parts.push('A rain is falling.');
+  else if (c.is_overcast) parts.push('The sky is overcast.');
+  else if (c.is_clear) parts.push('The sky is clear.');
+
+  if (c.is_high_tide) parts.push('The Thames is high.');
+  else if (c.is_low_tide) parts.push('The Thames is out.');
+
+  return parts.join(' ');
+}
+
+function escapeHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* boot */
+(async () => {
+  await refreshAll();
+  renderPage();
+  /* Refresh data and re-render every 10 minutes */
+  setInterval(async () => {
+    await refreshAll();
+    renderPage();
+  }, 10 * 60 * 1000);
+})();
+
+</script>
+</body>
+</html>
