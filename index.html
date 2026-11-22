@@ -916,7 +916,10 @@ const VOICES = {
   pollen: () => {
     const c = nowConditions();
     const dom = pollenDominant();
-    if (!dom || c.pollen_total < 5) return 'I am quiet. Nothing of mine is up today.';
+    /* London planes shed in spring, but open-meteo does not count them — say so rather than pretend. */
+    const m = new Date().getMonth();
+    const planeNote = (m >= 3 && m <= 5) ? ' The planes are shedding too, but no instrument here counts them.' : '';
+    if (!dom || c.pollen_total < 5) return 'I am quiet. Nothing of mine is up today.' + planeNote;
     const phrases = {
       birch:   `The birches are heavy on the air — ${Math.round(W.air.birch_pollen)} grains per cubic metre.`,
       alder:   `The alders are out — ${Math.round(W.air.alder_pollen)} grains per cubic metre.`,
@@ -925,7 +928,7 @@ const VOICES = {
       ragweed: `The ragweed is on the wind, late this year — ${Math.round(W.air.ragweed_pollen)} grains per cubic metre.`,
       olive:   `The olives are out, late and unusual for here — ${Math.round(W.air.olive_pollen)} grains per cubic metre.`
     };
-    return phrases[dom];
+    return phrases[dom] + planeNote;
   },
   almanac: () => {
     const c = nowConditions();
